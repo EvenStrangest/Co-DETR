@@ -33,6 +33,8 @@ for subdir_name in subdirs:
         cat_names=[f"botA_tl#{subdir_name[-1]}"]
     )
 
+    # TODO: this doesn't do what we want for classes; all annotations end up being of category "botA_tl#0"
+
     datasets.append(dataset)
 
 # Collect all DataFrames
