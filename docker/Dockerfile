@@ -35,5 +35,6 @@ RUN pip install scipy==1.10.1
 
 # Install etc.
 RUN pip install yapf==0.40.1
+RUN pip install einops
 
 WORKDIR /Co-DETR
