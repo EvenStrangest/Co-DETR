@@ -2,6 +2,8 @@ _base_ = [
     './configs/co_deformable_detr/co_deformable_detr_r50_1x_coco.py'
 ]
 
+# Specify the checkpoint to load pre-trained weights
+load_from = 'checkpoints/co_deformable_detr_r50_1x_coco.pth'
 
 model = dict(
     type='CoDETR',
