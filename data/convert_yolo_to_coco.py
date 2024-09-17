@@ -4,10 +4,10 @@ import os
 import pandas as pd
 
 # Define paths
-path_to_annotations = r"H:\Shared drives\RnD\Data\Robot-controlled 1\as_yolo\labels"
+path_to_annotations = r"H:\Shared drives\RnD\Data\Robot-controlled A\as_yolo\labels"
 rel_path_to_images = "..\\images\\"
-output_path = r"H:\Shared drives\RnD\Data\Robot-controlled 1\as_yolo_as_coco_annotations.json"
-intermediate_df_path = r"H:\Shared drives\RnD\Data\Robot-controlled 1\as_yolo_df.feather"
+output_path = r"H:\Shared drives\RnD\Data\Robot-controlled A\as_yolo_as_coco_annotations.json"
+intermediate_df_path = r"H:\Shared drives\RnD\Data\Robot-controlled A\as_yolo_df.feather"
 
 # Initialize a list to hold dataset objects
 datasets = []
