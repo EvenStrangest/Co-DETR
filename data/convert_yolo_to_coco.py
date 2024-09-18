@@ -8,6 +8,7 @@ path_to_annotations = r"H:\Shared drives\RnD\Data\Robot-controlled A\as_yolo\lab
 rel_path_to_images = "..\\images\\"
 output_path = r"H:\Shared drives\RnD\Data\Robot-controlled A\as_yolo_as_coco_annotations.json"
 intermediate_df_path = r"H:\Shared drives\RnD\Data\Robot-controlled A\as_yolo_df.feather"
+category_names = ['class0'] + [f"AR{i:02}" for i in range(1, 16)]
 
 # Initialize a list to hold dataset objects
 datasets = []
@@ -30,10 +31,12 @@ for subdir_name in subdirs:
     dataset = importer.ImportYoloV5(
         path=labels_subdir,
         path_to_images=os.path.join('..', rel_path_to_images, subdir_name),
-        cat_names=[f"botA_tl#{subdir_name[-1]}"]
+        cat_names=category_names
     )
 
-    # TODO: this doesn't do what we want for classes; all annotations end up being of category "botA_tl#0"
+    class_id = int(subdir_name.split(' ')[1])
+    dataset.df['cat_id'] = class_id
+    dataset.df['cat_name'] = category_names[class_id]
 
     datasets.append(dataset)
 
@@ -42,6 +45,7 @@ dfs = [ds.df for ds in datasets]
 
 # Concatenate all DataFrames into one
 combined_df = pd.concat(dfs, ignore_index=True)
+assert len(combined_df) == sum(len(df) for df in dfs)
 
 # Write concatenated DataFrame to disk
 combined_df.to_feather(intermediate_df_path)  # Requires pyarrow!
