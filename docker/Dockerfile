@@ -30,8 +30,8 @@ RUN conda clean --all
 RUN pip install openmim
 RUN pip install timm
 RUN mim install mmdet==2.25.3
-RUN pip install fairscale==0.4.13
-RUN pip install scipy==1.10.1
+RUN pip install fairscale
+RUN pip install scipy
 
 # Install etc.
 RUN pip install yapf==0.40.1
@@ -47,6 +47,9 @@ WORKDIR /checkpoints
 # TODO: add a prebuild step to download the checkpoints
 COPY ./checkpoints/deformable-detr_r50_16xb2-50e_coco_20221029_210934-6bc7d21b.pth /checkpoints
 COPY ./checkpoints/co_deformable_detr_r50_1x_coco.pth /checkpoints
+
+# May be needed to allow browsing of files within the container
+# RUN apt install coreutils
 
 WORKDIR /logs
 
