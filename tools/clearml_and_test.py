@@ -11,7 +11,7 @@ task = clearml.Task.init(project_name='Co-DETR', task_name='TestCOCO', task_type
 dataset = clearml.Dataset.get(dataset_id='eaeccf28c682478c9badb6d5c5700437')
 
 # set environment variable for the dataset path
-os.environ['MMDET_DATASETS'] = dataset.get_local_copy()
+os.environ['MMDET_DATASETS'] = dataset.get_local_copy() + '/'
 
 # execute the main function
 main()
