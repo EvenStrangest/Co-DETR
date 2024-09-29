@@ -48,8 +48,7 @@ WORKDIR /checkpoints
 COPY ./checkpoints/deformable-detr_r50_16xb2-50e_coco_20221029_210934-6bc7d21b.pth /checkpoints
 COPY ./checkpoints/co_deformable_detr_r50_1x_coco.pth /checkpoints
 
-# May be needed to allow browsing of files within the container
-# RUN apt install coreutils
+# TODO: consider copying here the ClearML configuration file (without the secrets!)
 
 WORKDIR /logs
 
