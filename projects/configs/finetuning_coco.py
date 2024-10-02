@@ -1,9 +1,19 @@
+# NOTE: created with this help https://chatgpt.com/share/66e7fb57-418c-8003-a7c3-95d1358c09bf
+
+# This is nothing but a technical test, so finetuning against the validation set is fine
+data_root = 'data/coco/'
+data = dict(
+    train=dict(
+        ann_file=data_root + 'annotations/instances_val2017.json',
+        img_prefix=data_root + 'val2017/')
+)
+
+# Specify the checkpoint to load pre-trained weights
+load_from = '/checkpoints/co_deformable_detr_r50_1x_coco.pth'
 _base_ = [
     './co_deformable_detr/co_deformable_detr_r50_1x_coco.py'
 ]
 
-# Specify the checkpoint to load pre-trained weights
-load_from = '/checkpoints/co_deformable_detr_r50_1x_coco.pth'
 
 model = dict(
     type='CoDETR',
