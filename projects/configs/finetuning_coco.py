@@ -1,5 +1,12 @@
 # NOTE: created with this help https://chatgpt.com/share/66e7fb57-418c-8003-a7c3-95d1358c09bf
 
+
+# Specify the checkpoint to load pre-trained weights
+_base_ = [
+    './co_deformable_detr/co_deformable_detr_r50_1x_coco.py'
+]
+load_from = '/checkpoints/co_deformable_detr_r50_1x_coco.pth'
+
 # This is nothing but a technical test, so finetuning against the validation set is fine
 data_root = 'data/coco/'
 data = dict(
@@ -7,13 +14,6 @@ data = dict(
         ann_file=data_root + 'annotations/instances_val2017.json',
         img_prefix=data_root + 'val2017/')
 )
-
-# Specify the checkpoint to load pre-trained weights
-load_from = '/checkpoints/co_deformable_detr_r50_1x_coco.pth'
-_base_ = [
-    './co_deformable_detr/co_deformable_detr_r50_1x_coco.py'
-]
-
 
 model = dict(
     type='CoDETR',
@@ -66,7 +66,4 @@ work_dir = '/checkpoints/ft_co_deformable_detr_on_coco'
 
 # Additional hooks (if any)
 custom_hooks = []
-
-# FP16 training (optional)
-# fp16 = dict(loss_scale=512.)
 
