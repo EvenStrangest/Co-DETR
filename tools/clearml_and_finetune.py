@@ -1,11 +1,11 @@
-from test import main
+from train import main
 
 import os
 import clearml
 
 
 # create task to run remotely
-task = clearml.Task.init(project_name='Co-DETR', task_name='TestCOCO', task_type=clearml.Task.TaskTypes.inference,)
+task = clearml.Task.init(project_name='Co-DETR', task_name='FinetuneCOCO', task_type=clearml.Task.TaskTypes.inference,)
 # task.execute_remotely(queue_name="default")
 
 # get MS COCO dataset from ClearML
@@ -16,5 +16,5 @@ os.environ['MMDET_DATASETS'] = dataset.get_local_copy() + '/'
 
 # execute the main function
 main()
-# TODO: consider refactoring test.py to extract the argument parsing logic into a separate function
+# TODO: consider refactoring train.py to extract the argument parsing logic into a separate function
 
