@@ -33,12 +33,6 @@
       <option name="volumeBindings">
         <list>
           <DockerVolumeBindingImpl>
-            <option name="containerPath" value="/opt/project" />
-            <option name="editable" value="true" />
-            <option name="hostPath" value="$PROJECT_DIR$" />
-            <option name="readOnly" value="false" />
-          </DockerVolumeBindingImpl>
-          <DockerVolumeBindingImpl>
             <option name="containerPath" value="/logs" />
             <option name="editable" value="true" />
             <option name="hostPath" value="C:\Users\asafe\PycharmProjects\logs" />
@@ -50,10 +44,23 @@
             <option name="hostPath" value="C:\Users\asafe\.clearml\cache" />
             <option name="readOnly" value="false" />
           </DockerVolumeBindingImpl>
+          <DockerVolumeBindingImpl>
+            <option name="containerPath" value="/opt/project" />
+            <option name="editable" value="true" />
+            <option name="hostPath" value="$PROJECT_DIR$/" />
+            <option name="readOnly" value="false" />
+          </DockerVolumeBindingImpl>
         </list>
       </option>
     </EXTENSION>
     <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+    <PathMappingSettings>
+      <option name="pathMappings">
+        <list>
+          <mapping local-root="$PROJECT_DIR$" remote-root="/opt/project" />
+        </list>
+      </option>
+    </PathMappingSettings>
     <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tools/clearml_and_test.py" />
     <option name="PARAMETERS" value="projects/configs/co_deformable_detr/co_deformable_detr_r50_1x_coco.py /checkpoints/co_deformable_detr_r50_1x_coco.pth --eval bbox" />
     <option name="SHOW_COMMAND_LINE" value="false" />
