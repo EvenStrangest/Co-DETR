@@ -62,8 +62,10 @@ log_config = dict(
 )
 
 # Work directory to save checkpoints and logs
-work_dir = '/checkpoints/ft_co_deformable_detr_on_coco'
+work_dir = '/logs/ft_co_deformable_detr_on_coco'
 
-# Additional hooks (if any)
-custom_hooks = []
+# Additional hooks
+custom_hooks = [
+    dict(type='ProgressBarHook', interval=1),
+]
 
