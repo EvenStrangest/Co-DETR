@@ -55,7 +55,7 @@ runner = dict(type='EpochBasedRunner', max_epochs=total_epochs)
 # Runtime settings
 checkpoint_config = dict(interval=1)
 log_config = dict(
-    interval=50,
+    interval=1,
     hooks=[
         dict(type='TextLoggerHook'),
     ]
@@ -65,7 +65,5 @@ log_config = dict(
 work_dir = '/logs/ft_co_deformable_detr_on_coco'
 
 # Additional hooks
-custom_hooks = [
-    dict(type='ProgressBarHook', interval=1),
-]
+custom_hooks = []
 
