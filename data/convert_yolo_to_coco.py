@@ -56,6 +56,7 @@ combined_dataset = importer.Dataset(combined_df)
 # Verify the combined dataset
 print(combined_dataset)
 print(combined_dataset.df.head())
+print(combined_dataset.df.tail())
 
 # Export to COCO format
 combined_dataset.export.ExportToCoco(
