@@ -9,10 +9,14 @@ task = clearml.Task.init(project_name='Co-DETR', task_name='FinetuneCOCO', task_
 # task.execute_remotely(queue_name="default")
 
 # get MS COCO dataset from ClearML
-dataset = clearml.Dataset.get(dataset_id='eaeccf28c682478c9badb6d5c5700437')
+mscoco = clearml.Dataset.get(dataset_id='eaeccf28c682478c9badb6d5c5700437')
+robota = clearml.Dataset.get(dataset_id='018f56fde567441b987451c695f0f629')
 
 # set environment variable for the dataset path
-os.environ['MMDET_DATASETS'] = dataset.get_local_copy() + '/'
+if os.environ.get('CHOICE_DATASET') == 'RobotA':
+    os.environ['MMDET_DATASETS'] = robota.get_local_copy() + '/'
+else:
+    os.environ['MMDET_DATASETS'] = mscoco.get_local_copy() + '/'
 
 # execute the main function
 main()
