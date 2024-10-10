@@ -12,14 +12,21 @@ task.set_base_docker(docker_image='361432929675.dkr.ecr.us-east-1.amazonaws.com/
                      docker_setup_bash_script='')
 # task.execute_remotely(queue_name="default")
 
+# list the mounted file systems
+os.system('df -h')
+# list files in /checkpoints directory
+os.system('ls -l /checkpoints')
+
 # get MS COCO dataset from ClearML
 mscoco = clearml.Dataset.get(dataset_id='eaeccf28c682478c9badb6d5c5700437')
 robota = clearml.Dataset.get(dataset_id='018f56fde567441b987451c695f0f629')
 
 # set environment variable for the dataset path
 if os.environ.get('CHOICE_DATASET') == 'RobotA':
+    print("Using RobotA dataset")
     os.environ['MMDET_DATASETS'] = robota.get_local_copy() + '/'
 else:
+    print("Using MS COCO dataset")
     os.environ['MMDET_DATASETS'] = mscoco.get_local_copy() + '/'
 
 # execute the main function
