@@ -8,7 +8,8 @@ local_root_path = r"H:\Shared drives\RnD\Data\Robot-controlled A"
 
 
 # Import COCO-format annotations
-annotations = importer.ImportCoco()
+annotations = importer.ImportCoco(path=os.path.join(local_root_path, "as_yolo_as_coco_ann_train.json"),
+                                  path_to_images='as_yolo/images')
 
 # Split the dataset into training and validation sets
 annotations.split(0.8)
