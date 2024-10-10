@@ -37,18 +37,18 @@ data = dict(
     workers_per_gpu=2,
     train=dict(
         type=dataset_type,
-        ann_file=data_root + 'as_yolo_as_coco_annotations.json',
-        img_prefix=data_root + 'as_yolo/images',
+        ann_file=data_root + 'as_yolo_as_coco_ann_train.json',
+        img_prefix=data_root + 'as_yolo/images/',
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
-        ann_file=data_root + 'as_yolo_as_coco_annotations.json',
-        img_prefix=data_root + 'as_yolo/images',
+        ann_file=data_root + 'as_yolo_as_coco_ann_val.json',
+        img_prefix=data_root + 'as_yolo/images/',
         pipeline=test_pipeline),
-    # test=dict(
-    #     type=dataset_type,
-    #     ann_file=data_root + 'annotations/instances_val2017.json',
-    #     img_prefix=data_root + 'val2017/',
-    #     pipeline=test_pipeline)
+    test=dict(
+        type=dataset_type,
+        ann_file=data_root + 'as_yolo_as_coco_ann_test.json',
+        img_prefix=data_root + 'as_yolo/images/',
+        pipeline=test_pipeline)
 )
 evaluation = dict(interval=1, metric='bbox')
