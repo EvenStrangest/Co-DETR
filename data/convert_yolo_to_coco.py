@@ -1,7 +1,9 @@
-from pylabel import importer
 import json
 import os
+
+from pylabel import importer
 import pandas as pd
+
 
 # TODO: replace all the slashes to proper POSIX ones
 

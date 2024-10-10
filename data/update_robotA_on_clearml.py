@@ -16,7 +16,7 @@ dataset.add_files(path=os.path.join(local_root_path, "as_yolo_as_coco_annotation
                   verbose=True)
 
 assert len(dataset.list_modified_files()) == 1
-assert len(dataset.list_files()) == 50529
+assert len(dataset.list_files()) == 50528 + 1
 
 # Upload dataset to ClearML server
 dataset.upload()
