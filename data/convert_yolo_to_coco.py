@@ -3,6 +3,8 @@ import json
 import os
 import pandas as pd
 
+# TODO: replace all the slashes to proper POSIX ones
+
 # Define paths
 path_to_annotations = r"H:\Shared drives\RnD\Data\Robot-controlled A\as_yolo\labels"
 rel_path_to_images = "..\\images\\"
@@ -50,6 +52,12 @@ assert len(combined_df) == sum(len(df) for df in dfs)
 # Write concatenated DataFrame to disk
 combined_df.to_feather(intermediate_df_path)  # Requires pyarrow!
 
+# Modify paths to images in the combined DataFrame to be relative to the root directory
+combined_df['img_folder'] = combined_df['img_folder'].apply(lambda _p: os.path.split(_p)[-1])
+
+# Assign unique IDs to each record
+combined_df['img_id'] = range(len(combined_df))
+
 # Create a new dataset object with the combined DataFrame
 combined_dataset = importer.Dataset(combined_df)
 
@@ -68,5 +76,6 @@ combined_dataset.export.ExportToCoco(
 with open(output_path, 'r') as f:
     coco_annotations = json.load(f)
 
+assert len(coco_annotations['images']) == sum(len(df) for df in dfs)
 print(coco_annotations['annotations'][0])
 
