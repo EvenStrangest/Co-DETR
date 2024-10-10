@@ -78,4 +78,5 @@ with open(output_path, 'r') as f:
 
 assert len(coco_annotations['images']) == sum(len(df) for df in dfs)
 print(coco_annotations['annotations'][0])
+print(coco_annotations['annotations'][-1])
 
