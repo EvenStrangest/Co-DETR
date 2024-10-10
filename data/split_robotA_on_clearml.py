@@ -7,9 +7,11 @@ from clearml import Dataset
 local_root_path = r"H:\Shared drives\RnD\Data\Robot-controlled A"
 
 
-# Import COCO annotations
+# Import COCO-format annotations
 annotations = importer.ImportCoco()
 
+# Split the dataset into training and validation sets
+annotations.split(0.8)
 
 # Create a dataset with ClearML`s Dataset class
 dataset = Dataset.create(
