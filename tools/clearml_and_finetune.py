@@ -19,7 +19,7 @@ os.system('ls -l /checkpoints')
 
 # get MS COCO dataset from ClearML
 mscoco = clearml.Dataset.get(dataset_id='eaeccf28c682478c9badb6d5c5700437')
-robota = clearml.Dataset.get(dataset_id='018f56fde567441b987451c695f0f629')
+robota = clearml.Dataset.get(dataset_id='4de72c7d8fc9489fb3b1bc292b0fb0e7')
 
 # set environment variable for the dataset path
 if os.environ.get('CHOICE_DATASET') == 'RobotA':
