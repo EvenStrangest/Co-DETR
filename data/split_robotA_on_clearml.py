@@ -8,8 +8,7 @@ local_root_path = r"H:\Shared drives\RnD\Data\Robot-controlled A"
 
 
 # Import COCO-format annotations
-annotations = importer.ImportCoco(path=os.path.join(local_root_path, "as_yolo_as_coco_annotations.json"),
-                                  path_to_images='as_yolo/images')
+annotations = importer.ImportCoco(path=os.path.join(local_root_path, "as_yolo_as_coco_annotations.json"))
 
 # Split the dataset into training and validation sets
 annotations.splitter.GroupShuffleSplit(train_pct=0.8, test_pct=0.05, val_pct=0.15, group_col='img_id', random_state=1)
@@ -36,7 +35,7 @@ test_dataset.export.ExportToCoco(output_path=os.path.join(local_root_path, "as_y
 # Create a dataset with ClearML`s Dataset class
 dataset = Dataset.create(
     dataset_project="SurgicalTools", dataset_name="RobotA",
-    dataset_version="1.1.0",
+    dataset_version="1.2.0",
     parent_datasets=["018f56fde567441b987451c695f0f629"]
 )
 
