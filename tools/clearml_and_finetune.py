@@ -3,9 +3,15 @@ from train import main
 import os
 import clearml
 
+if os.environ.get('CHOICE_DATASET') == 'RobotA':
+    # set the project name
+    task_name = 'FinetuneRobotA'
+else:
+    # set the project name
+    task_name = 'FinetuneCOCO'
 
 # create task to run remotely
-task = clearml.Task.init(project_name='Co-DETR', task_name='FinetuneCOCO', task_type=clearml.Task.TaskTypes.inference,
+task = clearml.Task.init(project_name='Co-DETR', task_name=task_name, task_type=clearml.Task.TaskTypes.inference,
                          deferred_init=False, )
 task.set_base_docker(docker_image='361432929675.dkr.ecr.us-east-1.amazonaws.com/trackimed/co_detr_manual:2024OCT06',
                      docker_arguments='',
