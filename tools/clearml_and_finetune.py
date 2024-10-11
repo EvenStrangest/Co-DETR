@@ -17,16 +17,14 @@ os.system('df -h')
 # list files in /checkpoints directory
 os.system('ls -l /checkpoints')
 
-# get MS COCO dataset from ClearML
-mscoco = clearml.Dataset.get(dataset_id='eaeccf28c682478c9badb6d5c5700437')
-robota = clearml.Dataset.get(dataset_id='4de72c7d8fc9489fb3b1bc292b0fb0e7')
-
 # set environment variable for the dataset path
 if os.environ.get('CHOICE_DATASET') == 'RobotA':
     print("Using RobotA dataset")
+    robota = clearml.Dataset.get(dataset_id='4de72c7d8fc9489fb3b1bc292b0fb0e7')
     os.environ['MMDET_DATASETS'] = robota.get_local_copy() + '/'
 else:
     print("Using MS COCO dataset")
+    mscoco = clearml.Dataset.get(dataset_id='eaeccf28c682478c9badb6d5c5700437')
     os.environ['MMDET_DATASETS'] = mscoco.get_local_copy() + '/'
 
 # execute the main function
