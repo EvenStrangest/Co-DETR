@@ -21,11 +21,13 @@ if os.name == 'posix':
 # set environment variable for the dataset path
 if os.environ.get('CHOICE_DATASET') == 'RobotA':
     print("Using RobotA dataset")
-    robota = clearml.Dataset.get(dataset_id='4de72c7d8fc9489fb3b1bc292b0fb0e7')
+    # robota = clearml.Dataset.get(dataset_id='4de72c7d8fc9489fb3b1bc292b0fb0e7')
+    robota = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='RobotA', dataset_version='1.1.0')
     os.environ['MMDET_DATASETS'] = robota.get_local_copy() + '/'
 else:
     print("Using MS COCO dataset")
-    mscoco = clearml.Dataset.get(dataset_id='eaeccf28c682478c9badb6d5c5700437')
+    # mscoco = clearml.Dataset.get(dataset_id='eaeccf28c682478c9badb6d5c5700437')
+    mscoco = clearml.Dataset.get(dataset_project='MS_COCO', dataset_name='MS_COCO_2017', dataset_version='1.0.0')
     os.environ['MMDET_DATASETS'] = mscoco.get_local_copy() + '/'
 
 # execute the main function
