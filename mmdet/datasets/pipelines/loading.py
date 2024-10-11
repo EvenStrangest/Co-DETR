@@ -58,11 +58,11 @@ class LoadImageFromFile:
         if self.file_client is None:
             self.file_client = mmcv.FileClient(**self.file_client_args)
 
+        filename = results['img_info']['filename']
+        if results['img_info'].get("folder", None) is not None:
+            filename = osp.join(results['img_info']['folder'], filename)
         if results['img_prefix'] is not None:
-            filename = osp.join(results['img_prefix'],
-                                results['img_info']['filename'])
-        else:
-            filename = results['img_info']['filename']
+            filename = osp.join(results['img_prefix'], filename)
 
         img_bytes = self.file_client.get(filename)
         img = mmcv.imfrombytes(
