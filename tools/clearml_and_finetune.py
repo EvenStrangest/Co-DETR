@@ -12,10 +12,11 @@ task.set_base_docker(docker_image='361432929675.dkr.ecr.us-east-1.amazonaws.com/
                      docker_setup_bash_script='')
 # task.execute_remotely(queue_name="default")
 
-# list the mounted file systems
-os.system('df -h')
-# list files in /checkpoints directory
-os.system('ls -l /checkpoints')
+if os.name == 'posix':
+    # list the mounted file systems
+    os.system('df -h')
+    # list files in /checkpoints directory
+    os.system('ls -l /checkpoints')
 
 # set environment variable for the dataset path
 if os.environ.get('CHOICE_DATASET') == 'RobotA':
