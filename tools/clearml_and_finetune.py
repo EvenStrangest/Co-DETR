@@ -1,9 +1,10 @@
 import os
+import sys
 
 from clearml import Task
 import clearml
 
-from train import main
+from train import main, parse_args
 
 
 if os.environ.get('CHOICE_DATASET') == 'RobotA':
@@ -15,11 +16,16 @@ else:
 
 # create task to run remotely
 task = Task.init(project_name='Co-DETR', task_name=task_name, task_type=clearml.Task.TaskTypes.inference,
+                 # auto_connect_arg_parser=False,
                  deferred_init=False, )
 task.set_base_docker(docker_image='361432929675.dkr.ecr.us-east-1.amazonaws.com/trackimed/co_detr_manual:2024OCT06',
                      docker_arguments=f'--env CHOICE_DATASET={os.environ.get("CHOICE_DATASET")}',
                      docker_setup_bash_script='')
+
+args = parse_args()
+
 task.execute_remotely(queue_name="default")
+print(f"sys.argv: {sys.argv}")
 
 if os.name == 'posix':
     # list the mounted file systems
