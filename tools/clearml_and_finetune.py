@@ -1,7 +1,10 @@
+import os
+
+from clearml import Task
+import clearml
+
 from train import main
 
-import os
-import clearml
 
 if os.environ.get('CHOICE_DATASET') == 'RobotA':
     # set the project name
@@ -11,12 +14,12 @@ else:
     task_name = 'FinetuneCOCO'
 
 # create task to run remotely
-task = clearml.Task.init(project_name='Co-DETR', task_name=task_name, task_type=clearml.Task.TaskTypes.inference,
-                         deferred_init=False, )
+task = Task.init(project_name='Co-DETR', task_name=task_name, task_type=clearml.Task.TaskTypes.inference,
+                 deferred_init=False, )
 task.set_base_docker(docker_image='361432929675.dkr.ecr.us-east-1.amazonaws.com/trackimed/co_detr_manual:2024OCT06',
-                     docker_arguments='',
+                     docker_arguments=f'--env CHOICE_DATASET={os.environ.get("CHOICE_DATASET")}',
                      docker_setup_bash_script='')
-# task.execute_remotely(queue_name="default")
+task.execute_remotely(queue_name="default")
 
 if os.name == 'posix':
     # list the mounted file systems
