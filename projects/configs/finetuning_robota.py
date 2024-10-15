@@ -45,7 +45,7 @@ total_epochs = 1  # You can adjust this as needed
 runner = dict(type='EpochBasedRunner', max_epochs=total_epochs)
 
 # Runtime settings
-checkpoint_config = dict(interval=1)
+checkpoint_config = dict(interval=200, by_epoch=False)
 log_config = dict(
     interval=1,
     hooks=[
@@ -58,5 +58,8 @@ log_config = dict(
 work_dir = '/logs/ft_co_deformable_detr_on_robota'
 
 # Additional hooks
-custom_hooks = []
+custom_hooks = [
+    dict(type='ClearMLCheckpointHook')
+]
+
 
