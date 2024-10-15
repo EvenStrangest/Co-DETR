@@ -41,7 +41,7 @@ lr_config = dict(
 )
 
 # Total epochs
-total_epochs = 1  # You can adjust this as needed
+total_epochs = 2  # You can adjust this as needed
 runner = dict(type='EpochBasedRunner', max_epochs=total_epochs)
 
 # Runtime settings
@@ -52,6 +52,11 @@ log_config = dict(
         dict(type='TextLoggerHook'),
         dict(type='TensorboardLoggerHook'),
     ]
+)
+evaluation = dict(
+    interval=100, by_epoch=False,
+    metric='bbox',
+    save_best='bbox_mAP'
 )
 
 # Work directory to save checkpoints and logs
