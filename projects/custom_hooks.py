@@ -1,9 +1,10 @@
 import os
 
-from mmcv.runner import Hook
+from mmcv.runner import Hook, HOOKS
 from clearml import Task
 
 
+@HOOKS.register_module()
 class ClearMLCheckpointHook(Hook):
     def after_save_checkpoint(self, runner):
         # Get the path to the latest checkpoint file
