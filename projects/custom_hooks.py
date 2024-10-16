@@ -6,7 +6,7 @@ from clearml import Task
 
 @HOOKS.register_module()
 class ClearMLCheckpointHook(Hook):
-    def after_save_checkpoint(self, runner):
+    def after_save_checkpoint(self, runner):  # TODO: there's no such stage in the runner! fix this!
         # Get the path to the latest checkpoint file
         checkpoint_path = runner.meta['hook_msgs']['last_ckpt']
 
