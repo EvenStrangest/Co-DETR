@@ -124,10 +124,10 @@ def main():
     args = parse_args()
 
     # create task to run remotely
-    task = clearml.Task.init(project_name='Co-DETR', task_name='TestCOCO', task_type=clearml.Task.TaskTypes.inference, )
+    task = clearml.Task.init(project_name='Co-DETR', task_name='TestRobotA', task_type=clearml.Task.TaskTypes.inference, )
     # task.execute_remotely(queue_name="default")
 
-    # get MS COCO dataset from ClearML
+    # get dataset from ClearML
     dataset = clearml.Dataset.get(dataset_id='eaeccf28c682478c9badb6d5c5700437')
     # dataset = clearml.Dataset.get(dataset_project='MS_COCO', dataset_name='MS_COCO_2017', dataset_version='1.0.0')
 

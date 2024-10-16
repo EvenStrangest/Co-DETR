@@ -24,7 +24,7 @@ task.set_base_docker(docker_image='361432929675.dkr.ecr.us-east-1.amazonaws.com/
 
 args = parse_args()
 
-task.execute_remotely(queue_name="default")
+# task.execute_remotely(queue_name="default")
 print(f"sys.argv: {sys.argv}")
 
 if os.name == 'posix':
