@@ -152,7 +152,7 @@ def main():
         os.environ['MMDET_DATASETS'] = mscoco.get_local_copy() + '/'
 
     # get checkpoint from ClearML, if need be
-    if args.checkpoint.startswith('https://app.clear.ml/'):
+    if args.checkpoint.startswith('https://files.clear.ml/'):
         checkpoint = clearml.StorageManager.get_local_copy(args.checkpoint)
         args.checkpoint = checkpoint
 
