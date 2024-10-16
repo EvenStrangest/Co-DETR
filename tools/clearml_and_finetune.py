@@ -15,8 +15,7 @@ else:
     task_name = 'FinetuneCOCO'
 
 # create task to run remotely
-task = Task.init(project_name='Co-DETR', task_name=task_name, task_type=clearml.Task.TaskTypes.inference,
-                 # auto_connect_arg_parser=False,
+task = Task.init(project_name='Co-DETR', task_name=task_name, task_type=clearml.Task.TaskTypes.training,
                  deferred_init=False, )
 task.set_base_docker(docker_image='361432929675.dkr.ecr.us-east-1.amazonaws.com/trackimed/co_detr_manual:2024OCT06',
                      docker_arguments=f'--env CHOICE_DATASET={os.environ.get("CHOICE_DATASET")}',

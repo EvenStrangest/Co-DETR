@@ -131,7 +131,12 @@ def main():
     args = parse_args()
 
     # create task to run remotely
-    task = clearml.Task.init(project_name='Co-DETR', task_name=task_name, task_type=clearml.Task.TaskTypes.inference, )
+    task = clearml.Task.init(project_name='Co-DETR', task_name=task_name, task_type=clearml.Task.TaskTypes.inference,
+                             deferred_init = False, )
+    task.set_base_docker(docker_image='361432929675.dkr.ecr.us-east-1.amazonaws.com/trackimed/co_detr_manual:2024OCT06',
+                         docker_arguments = f'--env CHOICE_DATASET={os.environ.get("CHOICE_DATASET")}',
+                         docker_setup_bash_script = '')
+
     # task.execute_remotely(queue_name="default")
 
     # set environment variable for the dataset path

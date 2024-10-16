@@ -29,7 +29,7 @@
         <list />
       </option>
       <option name="publishAllPorts" value="false" />
-      <option name="runCliOptions" value="--shm-size=8g --entrypoint= --rm" />
+      <option name="runCliOptions" value="--shm-size=8g --entrypoint= --rm --gpus all" />
       <option name="version" value="2" />
       <option name="volumeBindings">
         <list>
