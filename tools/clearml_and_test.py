@@ -121,18 +121,35 @@ def parse_args():
 
 
 def main():
+    if os.environ.get('CHOICE_DATASET') == 'RobotA':
+        # set the project name
+        task_name = 'FinetuneRobotA'
+    else:
+        # set the project name
+        task_name = 'FinetuneCOCO'
+
     args = parse_args()
 
     # create task to run remotely
-    task = clearml.Task.init(project_name='Co-DETR', task_name='TestRobotA', task_type=clearml.Task.TaskTypes.inference, )
+    task = clearml.Task.init(project_name='Co-DETR', task_name=task_name, task_type=clearml.Task.TaskTypes.inference, )
     # task.execute_remotely(queue_name="default")
 
-    # get dataset from ClearML
-    dataset = clearml.Dataset.get(dataset_id='eaeccf28c682478c9badb6d5c5700437')
-    # dataset = clearml.Dataset.get(dataset_project='MS_COCO', dataset_name='MS_COCO_2017', dataset_version='1.0.0')
-
     # set environment variable for the dataset path
-    os.environ['MMDET_DATASETS'] = dataset.get_local_copy() + '/'
+    if os.environ.get('CHOICE_DATASET') == 'RobotA':
+        print("Using RobotA dataset")
+        # robota = clearml.Dataset.get(dataset_id='4de72c7d8fc9489fb3b1bc292b0fb0e7')
+        robota = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='RobotA', dataset_version='1.2.0')
+        os.environ['MMDET_DATASETS'] = robota.get_local_copy() + '/'
+    else:
+        print("Using MS COCO dataset")
+        # mscoco = clearml.Dataset.get(dataset_id='eaeccf28c682478c9badb6d5c5700437')
+        mscoco = clearml.Dataset.get(dataset_project='MS_COCO', dataset_name='MS_COCO_2017', dataset_version='1.0.0')
+        os.environ['MMDET_DATASETS'] = mscoco.get_local_copy() + '/'
+
+    # get checkpoint from ClearML, if need be
+    if args.checkpoint.startswith('https://app.clear.ml/'):
+        checkpoint = clearml.StorageManager.get_local_copy(args.checkpoint)
+        args.checkpoint = checkpoint
 
     assert args.out or args.eval or args.format_only or args.show \
         or args.show_dir, \
