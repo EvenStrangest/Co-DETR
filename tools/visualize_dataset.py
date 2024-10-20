@@ -7,6 +7,7 @@ from mmcv import Config
 from mmdet.datasets import build_dataset
 import mmcv
 import clearml
+from mmdet.utils.misc import update_data_root
 
 
 # Get the dataset
@@ -17,9 +18,14 @@ os.environ['MMDET_DATASETS'] = robota.get_local_copy() + '/'
 
 # Load your existing configuration file
 cfg = Config.fromfile('projects/configs/_base_/datasets/robota_detection.py')
+update_data_root(cfg)
 
 # Build the dataset using the configuration
 dataset = build_dataset(cfg.data.train)
+
+# Create an output directory for the images
+output_dir = '/logs/visualize_dataset_robota'  # You can change this to your preferred directory
+os.makedirs(output_dir, exist_ok=True)
 
 # Iterate over the dataset and visualize images with bounding boxes
 for idx in range(len(dataset)):
@@ -46,8 +52,9 @@ for idx in range(len(dataset)):
         text_color='green',
         thickness=2,
         font_scale=0.5,
-        show=True,
-        wait_time=0
+        show=False,
+        wait_time=0,
+        out_file=os.path.join(output_dir, f'image_{idx}.png')  # TODO: change filename to match dataset
     )
 
     # Break after visualizing the first 10 images
