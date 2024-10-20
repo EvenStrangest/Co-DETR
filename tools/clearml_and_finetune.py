@@ -5,6 +5,7 @@ from clearml import Task
 import clearml
 
 from train import main, parse_args
+import projects.datasets.robota
 
 
 if os.environ.get('CHOICE_DATASET') == 'RobotA':

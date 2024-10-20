@@ -21,6 +21,7 @@ from mmdet.utils import (build_ddp, build_dp, compat_cfg, get_device,
                          replace_cfg_vals, setup_multi_processes,
                          update_data_root)
 from projects import *
+import projects.datasets.robota
 
 
 def parse_args():
