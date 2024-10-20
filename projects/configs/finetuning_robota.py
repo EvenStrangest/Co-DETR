@@ -6,6 +6,7 @@ _base_ = [
     './co_deformable_detr/co_deformable_detr_r50_1x_robota.py'
 ]
 load_from = '/checkpoints/co_deformable_detr_r50_1x_coco.pth'
+# resume_from = ''
 
 model = dict(
     type='CoDETR',

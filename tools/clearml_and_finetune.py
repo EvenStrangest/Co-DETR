@@ -48,4 +48,5 @@ else:
 # execute the main function
 main()
 # TODO: consider refactoring train.py to extract the argument parsing logic into a separate function
+# TODO: modifying main would become a necessity for us to catch URLs on ClearML (e.g., in load_from and resume_from) and utilize get_local_copy()
 
