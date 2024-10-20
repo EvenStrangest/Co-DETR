@@ -48,13 +48,14 @@ for idx in tqdm(range(len(dataset))):
 
     # Get the image tensor and convert it to a NumPy array
     img = data['img'].data.permute(1, 2, 0).numpy()
+    # TODO: fails for MS COCO because it is somehow a list of tensors, whereas it is simply a tensor for RobotA
 
     # Get bounding boxes and labels
     bboxes = data['gt_bboxes'].data.numpy()
     labels = data['gt_labels'].data.numpy()
 
     # Copy the image to avoid modifying the original
-    img_show = img.copy()
+    img_show = img.copy()  # TODO: getting it normalized somehow from the dataset, but imshow_det_bboxes() expects it normalized differently
 
     # Visualize the image with bounding boxes
     mmcv.imshow_det_bboxes(
