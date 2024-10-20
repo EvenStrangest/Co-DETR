@@ -155,8 +155,8 @@ def main():
 
     # get checkpoint from ClearML, if need be
     if args.checkpoint.startswith('https://files.clear.ml/'):
-        checkpoint = clearml.StorageManager.get_local_copy(args.checkpoint)
-        args.checkpoint = checkpoint
+        checkpoint_fpath = clearml.StorageManager.get_local_copy(args.checkpoint)
+        args.checkpoint = checkpoint_fpath
 
     assert args.out or args.eval or args.format_only or args.show \
         or args.show_dir, \
