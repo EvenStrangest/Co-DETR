@@ -9,6 +9,7 @@ import projects.datasets.robota
 import mmcv
 import clearml
 from mmdet.utils.misc import update_data_root
+from tqdm import tqdm
 
 
 # Get the dataset
@@ -29,7 +30,7 @@ output_dir = '/logs/visualize_dataset_robota'  # You can change this to your pre
 os.makedirs(output_dir, exist_ok=True)
 
 # Iterate over the dataset and visualize images with bounding boxes
-for idx in range(len(dataset)):
+for idx in tqdm(range(len(dataset))):
     data = dataset[idx]
 
     # Get the image tensor and convert it to a NumPy array
