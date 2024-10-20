@@ -5,6 +5,7 @@ import os
 
 from mmcv import Config
 from mmdet.datasets import build_dataset
+import projects.datasets.robota
 import mmcv
 import clearml
 from mmdet.utils.misc import update_data_root

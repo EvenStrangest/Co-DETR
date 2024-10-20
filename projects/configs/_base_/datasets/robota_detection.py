@@ -1,5 +1,5 @@
 # dataset settings
-dataset_type = 'CocoDataset'
+dataset_type = 'RobotaDataset'
 data_root = 'data/Robot-controlled A/'
 
 img_norm_cfg = dict(
