@@ -18,13 +18,13 @@ model = dict(
 # Optimizer settings
 optimizer = dict(
     type='AdamW',
-    lr=1e-5,  # Lower learning rate as per your request
+    lr=1e-5,  # A low learning rate
 #   weight_decay=0.0001,
     paramwise_cfg=dict(
         custom_keys={
             # Freeze the backbone by setting its learning rate to zero
             'backbone': dict(lr_mult=0.0),
-            'neck': dict(lr_mult=0.0),
+            'neck': dict(lr_mult=0.25),
             # Optionally adjust other layers
         }
     )
