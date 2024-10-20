@@ -124,10 +124,10 @@ def parse_args():
 def main():
     if os.environ.get('CHOICE_DATASET') == 'RobotA':
         # set the project name
-        task_name = 'FinetuneRobotA'
+        task_name = 'EvaluateRobotA'
     else:
         # set the project name
-        task_name = 'FinetuneCOCO'
+        task_name = 'EvaluateCOCO'
 
     args = parse_args()
 
