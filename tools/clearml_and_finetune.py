@@ -128,7 +128,7 @@ def main():
 
     args = parse_args()
 
-    # TODO: consider optionally postponing this, for more local tests
+    # TODO: consider optionally postponing this, for more local tests before enqueuing the task
     task.execute_remotely(queue_name="default")
     print(f"sys.argv: {sys.argv}")
 
