@@ -118,6 +118,26 @@ def load_url_dist(url, model_dir=None):
     return checkpoint
 
 
+def load_clearml_dist(url, map_location=None):
+    """In distributed setting, this function only download checkpoint at local
+    rank 0."""
+    try:
+        from clearml import StorageManager
+    except ImportError:
+        raise ImportError(
+            'Please install clearml to load checkpoint from ClearNl with caching.')
+    rank, world_size = get_dist_info()
+    rank = int(os.environ.get('LOCAL_RANK', rank))
+    if rank == 0:
+        checkpoint_fpath = StorageManager.get_local_copy(url)
+        checkpoint = torch.load(checkpoint_fpath, map_location=map_location)
+    if world_size > 1:
+        torch.distributed.barrier()
+        if rank > 0:
+            checkpoint = torch.load(checkpoint_fpath, map_location=map_location)
+    return checkpoint
+
+
 def load_pavimodel_dist(model_path, map_location=None):
     """In distributed setting, this function only download checkpoint at local
     rank 0."""
@@ -264,6 +284,8 @@ def _load_checkpoint(filename, map_location=None):
         model_name = filename[8:]
         checkpoint = load_url_dist(model_urls[model_name])
         checkpoint = _process_mmcls_checkpoint(checkpoint)
+    elif filename.startswith(('https://files.clear.ml/', 'http://files.clear.ml/')):
+        checkpoint = load_clearml_dist(filename)
     elif filename.startswith(('http://', 'https://')):
         checkpoint = load_url_dist(filename)
     elif filename.startswith('pavi://'):

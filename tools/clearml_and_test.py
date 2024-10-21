@@ -153,11 +153,6 @@ def main():
         mscoco = clearml.Dataset.get(dataset_project='MS_COCO', dataset_name='MS_COCO_2017', dataset_version='1.0.0')
         os.environ['MMDET_DATASETS'] = mscoco.get_local_copy() + '/'
 
-    # get checkpoint from ClearML, if need be
-    if args.checkpoint.startswith('https://files.clear.ml/'):
-        checkpoint_fpath = clearml.StorageManager.get_local_copy(args.checkpoint)
-        args.checkpoint = checkpoint_fpath
-
     assert args.out or args.eval or args.format_only or args.show \
         or args.show_dir, \
         ('Please specify at least one operation (save/eval/format/show the '

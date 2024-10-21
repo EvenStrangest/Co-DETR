@@ -152,8 +152,6 @@ def main():
 
     cfg = Config.fromfile(args.config)
 
-    # TODO: catch URLs on ClearML (e.g., in load_from and resume_from), call get_local_copy() and replace the URLs
-
     # replace the ${key} with the value of cfg.key
     cfg = replace_cfg_vals(cfg)
 
