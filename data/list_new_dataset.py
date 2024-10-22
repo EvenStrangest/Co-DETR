@@ -1,6 +1,7 @@
+# NOTE: an alternative would be the use of tools/dataset_converters/images2coco.py
+
 from pylabel import importer
 
-from data.split_robotA_on_clearml import annotations
 
 images_path = r"H:\Shared drives\RnD\Data\Lab A\raw_images"
 annotations_path = r"H:\Shared drives\RnD\Data\Lab A\raw_images.json"
