@@ -18,7 +18,7 @@ train_pipeline = [
     dict(type='DefaultFormatBundle'),
     dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels']),
 ]
-test_pipeline = [
+test_pipeline = [  # TODO: also load annotations, since this is not a blind test!
     dict(type='LoadImageFromFile'),
     dict(
         type='MultiScaleFlipAug',
@@ -29,7 +29,7 @@ test_pipeline = [
             dict(type='RandomFlip'),
             dict(type='Normalize', **img_norm_cfg),
             dict(type='Pad', size_divisor=32),
-            dict(type='ImageToTensor', keys=['img']),
+            dict(type='ImageToTensor', keys=['img']),  # TODO: is DefaultFormatBundle equivalent in this case?
             dict(type='Collect', keys=['img']),
         ])
 ]
