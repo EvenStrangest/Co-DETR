@@ -1,32 +1,23 @@
 # https://chatgpt.com/share/67188e15-3b80-8003-b0e6-a39dd3fb3ed2
-# NOTE: an alternative would be the use of tools/dataset_converters/images2coco.py
+# NOTE: PyLabel fails to correctly export to MS COCO format images with nothing but background, so we'll do without
 
-from pylabel import importer
-import pandas as pd
+from tools.dataset_converters.images2coco import collect_image_infos, cvt_to_coco_json
+import mmcv
 
 
 images_path = r"H:\Shared drives\RnD\Data\Lab A\raw_images"
 annotations_path = r"H:\Shared drives\RnD\Data\Lab A\raw_images.json"
 
-# Import images from the folder
-dataset = importer.ImportImagesOnly(images_path)
+# 1 load image list info
+print(f'Collecting image infos from {images_path}')
+img_infos = collect_image_infos(images_path)
 
-# Create a dummy category
-categories = pd.DataFrame([{
-    'category_id': 1,
-    'category_name': 'object',
-    'supercategory': 'object'
-}])
+# 2 convert to coco format data
+classes = [f'AR{i:02}' for i in range(1, 16)]  # TODO: is this really correct?
+print(f"Classes: {classes}")
+coco_info = cvt_to_coco_json(img_infos, classes)
 
-# Assign the dummy category to the dataset
-dataset.cat_df = categories
+# 3 dump
+print(f'save json file: {annotations_path}')
+mmcv.dump(coco_info, annotations_path)
 
-# Create an empty annotations DataFrame with required columns
-annotations_columns = ['image_id', 'category_id', 'annotation_id', 'iscrowd', 'area', 'bbox', 'segmentation']
-annotations = pd.DataFrame(columns=annotations_columns)
-
-# Assign the empty annotations DataFrame to the dataset
-dataset.anno_df = annotations
-
-# Export the dataset to COCO JSON format
-dataset.export.ExportToCoco(annotations_path)
