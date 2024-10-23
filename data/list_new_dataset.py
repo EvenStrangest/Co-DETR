@@ -9,7 +9,7 @@ images_path = r"H:\Shared drives\RnD\Data\Lab A\raw_images"
 annotations_path = r"H:\Shared drives\RnD\Data\Lab A\raw_images.json"
 
 # Import images from the folder
-dataset = importer.ImportImages(images_path)
+dataset = importer.ImportImagesOnly(images_path)
 
 # Create a dummy category
 categories = pd.DataFrame([{
