@@ -1,7 +1,10 @@
+from os import environ
+
 _base_ = [
-    '../_base_/datasets/robota_detection.py',
+    '../_base_/datasets/laba_detection.py' if environ.get('CHOICE_DATASET') == 'LabA' else '../_base_/datasets/robota_detection.py',
     '../_base_/default_runtime.py'
 ]
+
 # model settings
 num_dec_layer = 6
 lambda_2 = 2.0
