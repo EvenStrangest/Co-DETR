@@ -21,7 +21,7 @@ from mmdet.utils import (build_ddp, build_dp, compat_cfg, get_device,
                          replace_cfg_vals, setup_multi_processes,
                          update_data_root)
 from projects import *
-import projects.datasets.robota
+import projects.datasets.robota  # TODO: replace this with the correct entry in the `custom_imports` field of the config file, a la `custom_imports = dict(imports=['projects.datasets.robota'], allow_failed_imports=False)`
 
 
 def parse_args():
@@ -185,6 +185,8 @@ def main():
 
     cfg = compat_cfg(cfg)
 
+    print(f'Config:\n{cfg.pretty_text}')
+
     # set multi-process settings
     setup_multi_processes(cfg)
 
@@ -228,14 +230,14 @@ def main():
 
     # in case the test dataset is concatenated
     if isinstance(cfg.data.test, dict):
-        cfg.data.test.test_mode = True
+        # cfg.data.test.test_mode = True  # not enforcing test mode to allow for visualization of annotations
         if cfg.data.test_dataloader.get('samples_per_gpu', 1) > 1:
             # Replace 'ImageToTensor' to 'DefaultFormatBundle'
             cfg.data.test.pipeline = replace_ImageToTensor(
                 cfg.data.test.pipeline)
     elif isinstance(cfg.data.test, list):
-        for ds_cfg in cfg.data.test:
-            ds_cfg.test_mode = True
+        # for ds_cfg in cfg.data.test:
+        #     ds_cfg.test_mode = True  # not enforcing test mode to allow for visualization of annotations
         if cfg.data.test_dataloader.get('samples_per_gpu', 1) > 1:
             for ds_cfg in cfg.data.test:
                 ds_cfg.pipeline = replace_ImageToTensor(ds_cfg.pipeline)

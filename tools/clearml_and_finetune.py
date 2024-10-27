@@ -25,7 +25,7 @@ from clearml import Task
 import clearml
 
 from projects import *
-import projects.datasets.robota
+import projects.datasets.robota  # TODO: replace this with the correct entry in the `custom_imports` field of the config file, a la `custom_imports = dict(imports=['projects.datasets.robota'], allow_failed_imports=False)`
 
 
 def parse_args():
