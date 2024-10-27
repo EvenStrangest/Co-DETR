@@ -125,6 +125,9 @@ def main():
     if os.environ.get('CHOICE_DATASET') == 'RobotA':
         # set the project name
         task_name = 'EvaluateRobotA'
+    elif os.environ.get('CHOICE_DATASET') == 'LabA':
+        # set the project name
+        task_name = 'EvaluateLabA'
     else:
         # set the project name
         task_name = 'EvaluateCOCO'
@@ -147,6 +150,10 @@ def main():
         # robota = clearml.Dataset.get(dataset_id='4de72c7d8fc9489fb3b1bc292b0fb0e7')
         robota = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='RobotA', dataset_version='1.2.0')
         os.environ['MMDET_DATASETS'] = robota.get_local_copy() + '/'
+    elif os.environ.get('CHOICE_DATASET') == 'LabA':
+        print("Using LabA dataset")
+        laba = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='LabA', dataset_version='1.0.0')
+        os.environ['MMDET_DATASETS'] = laba.get_local_copy() + '/'
     else:
         print("Using MS COCO dataset")
         # mscoco = clearml.Dataset.get(dataset_id='eaeccf28c682478c9badb6d5c5700437')
