@@ -80,5 +80,7 @@ evaluation = dict(interval=1, metric='bbox')
 
 custom_imports = dict(
     imports=[#'projects.custom_pipelines',
-             'projects.custom_augmentations'],
+             'projects.custom_augmentations',
+             #'projects.custom_hooks,
+             'projects.custom_loaders',],  # TODO: this is not the relevant place for this import
     allow_failed_imports=False)

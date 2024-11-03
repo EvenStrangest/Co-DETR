@@ -63,9 +63,6 @@ def update_data_root(cfg, logger=None):
     else:
         return
 
-    assert isinstance(cfg, mmcv.Config), \
-        f'cfg got wrong type: {type(cfg)}, expected mmcv.Config'
-
     def update(cfg, src_str, dst_str):
         for k, v in cfg.items():
             if isinstance(v, mmcv.ConfigDict):
