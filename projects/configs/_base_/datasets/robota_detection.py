@@ -41,8 +41,10 @@ test_pipeline = [
     dict(type='Normalize', **img_norm_cfg),
     dict(type='Pad', size_divisor=32),
     dict(type='AddAugmentationID'),
-    dict(type='DefaultFormatBundle'),
-    dict(type='Collect', keys=['img'], meta_keys=('ori_filename', 'filename', 'flip', 'flip_direction', 'rotation_angle')),
+    dict(type='ImageToTensor', keys=['img']),
+    # dict(type='DefaultFormatBundle'),
+    dict(type='Collect', keys=['img'], meta_keys=('ori_filename', 'filename', 'flip', 'flip_direction')),
+    # dict(type='Collect', keys=['img'], meta_keys=('ori_filename', 'filename', 'flip', 'flip_direction', 'rotation_angle')),
 ]
 
 data = dict(
