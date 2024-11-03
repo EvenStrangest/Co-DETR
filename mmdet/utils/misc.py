@@ -72,7 +72,10 @@ def update_data_root(cfg, logger=None):
                 update(cfg[k], src_str, dst_str)
             if isinstance(v, list):
                 for i, _ in enumerate(v):
-                    update(v[i], src_str, dst_str)
+                    if isinstance(v[i], mmcv.ConfigDict):
+                        update(v[i], src_str, dst_str)
+                    elif isinstance(v[i], str) and src_str in v[i]:
+                        v[i] = v[i].replace(src_str, dst_str)
             if isinstance(v, str) and src_str in v:
                 cfg[k] = v.replace(src_str, dst_str)
 
