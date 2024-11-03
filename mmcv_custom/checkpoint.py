@@ -125,7 +125,7 @@ def load_clearml_dist(url, map_location=None):
         from clearml import StorageManager
     except ImportError:
         raise ImportError(
-            'Please install clearml to load checkpoint from ClearNl with caching.')
+            'Please install clearml to load checkpoint from ClearML with authentication and caching.')
     rank, world_size = get_dist_info()
     rank = int(os.environ.get('LOCAL_RANK', rank))
     if rank == 0:
