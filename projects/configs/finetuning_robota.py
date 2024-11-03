@@ -5,7 +5,7 @@
 _base_ = [
     './co_deformable_detr/co_deformable_detr_r50_1x_robota.py'
 ]
-load_from = '/checkpoints/co_deformable_detr_r50_1x_coco.pth'
+load_from = 'https://files.clear.ml/Co-DETR/FinetuneRobotA%20lr%201e-5%20neck%20lr%20factor%200.25.b10ab572e11444dc8b47cbddb867d420/models/epoch_1.pth'
 # resume_from = ''
 
 model = dict(
