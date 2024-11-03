@@ -50,11 +50,19 @@ test_pipeline = [
 data = dict(
     samples_per_gpu=2,
     workers_per_gpu=2,
-    train=dict(
-        type=dataset_type,
-        ann_file=data_root + 'as_yolo_as_coco_ann_train.json',
-        img_prefix=data_root + 'as_yolo/images/',
-        pipeline=train_pipeline),
+    train=dict(type='ConcatDataset',
+               datasets=[
+                   dict(
+                       type=dataset_type,
+                       ann_file=data_root + 'as_yolo_as_coco_ann_train.json',
+                       img_prefix=data_root + 'as_yolo/images/',
+                       pipeline=train_pipeline),
+                     dict(
+                         type=dataset_type,
+                         ann_file=data_root + 'photomontages_round_1_as_coco_annotations.json',
+                         img_prefix=data_root + 'photomontages/round_1/',
+                         pipeline=train_pipeline),
+               ]),
     val=dict(
         type=dataset_type,
         ann_file=data_root + 'as_yolo_as_coco_ann_val.json',
