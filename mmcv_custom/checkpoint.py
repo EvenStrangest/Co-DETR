@@ -285,7 +285,7 @@ def _load_checkpoint(filename, map_location=None):
         checkpoint = load_url_dist(model_urls[model_name])
         checkpoint = _process_mmcls_checkpoint(checkpoint)
     elif filename.startswith(('https://files.clear.ml/', 'http://files.clear.ml/')):
-        checkpoint = load_clearml_dist(filename)
+        checkpoint = load_clearml_dist(filename, map_location=map_location)
     elif filename.startswith(('http://', 'https://')):
         checkpoint = load_url_dist(filename)
     elif filename.startswith('pavi://'):
