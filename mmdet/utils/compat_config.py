@@ -95,7 +95,7 @@ def compat_loader_args(cfg):
         cfg.data.test_dataloader['workers_per_gpu'] = workers_per_gpu
 
     # special process for val_dataloader
-    if 'samples_per_gpu' in cfg.data.val:
+    if 'val' in cfg.data and 'samples_per_gpu' in cfg.data.val:
         # keep default value of `sample_per_gpu` is 1
         assert 'samples_per_gpu' not in \
                cfg.data.val_dataloader, ('`samples_per_gpu` are set '
