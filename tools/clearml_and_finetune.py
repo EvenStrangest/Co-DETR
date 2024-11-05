@@ -128,9 +128,20 @@ def main():
 
     args = parse_args()
 
+    def is_running_remotely() -> bool:
+        # ClearML Agent sets these environment variables in remote execution
+        return os.getenv("CLEARML_AGENT_EXECUTION") == "1" or os.getenv("TRAINS_AGENT_EXECUTION") == "1"
+
     # TODO: consider optionally postponing this, for more local tests before enqueuing the task
     task.execute_remotely(queue_name="default")
     print(f"sys.argv: {sys.argv}")
+    if is_running_remotely():
+        if not torch.cuda.is_available():
+            raise RuntimeError("No CUDA GPUs are available at initialization.")
+        else:
+            print(f"Detected {torch.cuda.device_count()} CUDA device(s):")
+            for i in range(torch.cuda.device_count()):
+                print(f"  - {torch.cuda.get_device_name(i)}")
 
     if os.name == 'posix':
         # list the mounted file systems
