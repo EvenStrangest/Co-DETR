@@ -3,6 +3,9 @@ import os
 from clearml import Dataset
 
 
+# NOTE: RobotA_with_Photomontage_Round2 uses this same code, with RobotA_with_Photomontage_Round1 as the parent and sets version 1.4.0
+
+
 local_root_path = r"H:\Shared drives\RnD\Data\Robot-controlled A"
 
 robota = Dataset.get(dataset_project='SurgicalTools', dataset_name='RobotA', dataset_version='1.2.0')
