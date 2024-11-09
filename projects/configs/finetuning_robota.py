@@ -25,7 +25,7 @@ optimizer = dict(
     paramwise_cfg=dict(
         custom_keys={
             # Freeze the backbone by setting its learning rate to zero
-            'backbone': dict(lr_mult=0.0),
+            'backbone': dict(lr_mult=0.1),
             'neck': dict(lr_mult=0.25),
             # Optionally adjust other layers
         }

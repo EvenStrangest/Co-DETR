@@ -115,7 +115,7 @@ def main():
     if os.environ.get('CHOICE_DATASET') == 'RobotA':
         # set the project name
         task_name = 'FinetuneRobotA'
-        task_name += '_with_Round2'
+        task_name += '_with_Round2_backbone_lrm0.1'
     else:
         # set the project name
         task_name = 'FinetuneCOCO'
