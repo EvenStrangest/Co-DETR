@@ -6,7 +6,8 @@ _base_ = [
     './co_deformable_detr/co_deformable_detr_r50_1x_robota.py'
 ]
 # load_from = 'https://files.clear.ml/Co-DETR/FinetuneRobotA%20lr%201e-5%20neck%20lr%20factor%200.25.b10ab572e11444dc8b47cbddb867d420/models/epoch_1.pth'
-load_from = 'https://files.clear.ml/Co-DETR/FinetuneRobotA.bdeff4043035447c885ca769ef7673a4/models/epoch_2.pth'
+# load_from = 'https://files.clear.ml/Co-DETR/FinetuneRobotA.bdeff4043035447c885ca769ef7673a4/models/epoch_2.pth'
+load_from = 'https://files.clear.ml/Co-DETR/FinetuneRobotA_with_Round2_backbone_lrm0.1.131b8e106c7143028650f55a8b786848/models/epoch_2.pth'
 # resume_from = ''
 
 model = dict(
@@ -25,7 +26,7 @@ optimizer = dict(
     paramwise_cfg=dict(
         custom_keys={
             # Freeze the backbone by setting its learning rate to zero
-            'backbone': dict(lr_mult=0.1),
+            'backbone': dict(lr_mult=0.0),
             'neck': dict(lr_mult=0.25),
             # Optionally adjust other layers
         }
@@ -43,7 +44,7 @@ lr_config = dict(
 )
 
 # Total epochs
-total_epochs = 2  # You can adjust this as needed
+total_epochs = 4  # You can adjust this as needed
 runner = dict(type='EpochBasedRunner', max_epochs=total_epochs)
 
 # Runtime settings
