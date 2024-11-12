@@ -48,7 +48,7 @@ total_epochs = 4  # You can adjust this as needed
 runner = dict(type='EpochBasedRunner', max_epochs=total_epochs)
 
 # Runtime settings
-checkpoint_config = dict(interval=200, by_epoch=False)
+checkpoint_config = dict(interval=1000, by_epoch=False)
 log_config = dict(
     interval=1,
     hooks=[
