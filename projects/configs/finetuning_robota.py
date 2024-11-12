@@ -50,7 +50,7 @@ runner = dict(type='EpochBasedRunner', max_epochs=total_epochs)
 # Runtime settings
 checkpoint_config = dict(interval=1000, by_epoch=False)
 log_config = dict(
-    interval=1,
+    interval=5,
     hooks=[
         dict(type='TextLoggerHook'),
         dict(type='TensorboardLoggerHook'),
