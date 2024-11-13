@@ -44,7 +44,7 @@ lr_config = dict(
 )
 
 # Total epochs
-total_epochs = 4  # You can adjust this as needed
+total_epochs = 3
 runner = dict(type='EpochBasedRunner', max_epochs=total_epochs)
 
 # Runtime settings

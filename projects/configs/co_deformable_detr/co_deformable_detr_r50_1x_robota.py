@@ -203,7 +203,7 @@ model = dict(
             allowed_border=-1,
             pos_weight=-1,
             debug=False),],
-    test_cfg=[
+    test_cfg=[  # TODO: what's all this talk of NMS?
         dict(max_per_img=100),
         dict(
             rpn=dict(
