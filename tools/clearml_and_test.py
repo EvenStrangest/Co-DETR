@@ -276,10 +276,16 @@ def main():
     else:
         model.CLASSES = dataset.CLASSES
 
+    # TODO: export this to args !!!
+    if args.show_dir is not None and not distributed:
+        show_results_kwargs = dict(thickness = 4, font_size = 40,)
+    else:
+        show_results_kwargs = dict()
+
     if not distributed:
         model = build_dp(model, cfg.device, device_ids=cfg.gpu_ids)
         outputs = single_gpu_test(model, data_loader, args.show, args.show_dir,
-                                  args.show_score_thr)
+                                  args.show_score_thr, show_results_kwargs)
     else:
         model = build_ddp(
             model,
