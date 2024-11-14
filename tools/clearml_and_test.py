@@ -124,15 +124,19 @@ def parse_args():
 def main():
     if os.environ.get('CHOICE_DATASET') == 'RobotA':
         # set the project name
-        task_name = 'EvaluateRobotA'
+        task_name = 'EvalRA'
     elif os.environ.get('CHOICE_DATASET') == 'LabA':
         # set the project name
-        task_name = 'EvaluateLabA'
+        task_name = 'EvalLA'
     else:
         # set the project name
-        task_name = 'EvaluateCOCO'
+        task_name = 'EvalCOCO'
 
     args = parse_args()
+
+    checkpoint_nickname = args.checkpoint.split('FtRA_')[-1].\
+        replace('https://files.clear.ml/', '').replace('.pth', '').replace('/models', '').replace('/', '_')
+    task_name += f"_{checkpoint_nickname}"
 
     # create ClearML task
     task = clearml.Task.init(project_name='Co-DETR', task_name=task_name, task_type=clearml.Task.TaskTypes.inference,
