@@ -309,6 +309,7 @@ def main():
         if args.out:
             print(f'\nwriting results to {args.out}')
             mmcv.dump(outputs, args.out)
+            task.upload_artifact(name="outputs", artifact_object=args.out)
         kwargs = {} if args.eval_options is None else args.eval_options
         if args.format_only:
             dataset.format_results(outputs, **kwargs)
@@ -326,6 +327,7 @@ def main():
             metric_dict = dict(config=args.config, metric=metric)
             if args.work_dir is not None and rank == 0:
                 mmcv.dump(metric_dict, json_file)
+                task.upload_artifact(name="evaluation_results", artifact_object=json_file)
 
 
 if __name__ == '__main__':
