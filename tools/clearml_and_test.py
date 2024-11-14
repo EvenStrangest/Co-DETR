@@ -296,6 +296,14 @@ def main():
             model, data_loader, args.tmpdir, args.gpu_collect
             or cfg.evaluation.get('gpu_collect', False))
 
+    # upload contents of show_dir to ClearML
+    if args.show_dir is not None and os.path.exists(args.show_dir):
+        for image_name in os.listdir(args.show_dir):
+            image_path = os.path.join(args.show_dir, image_name)
+            if os.path.isfile(image_path):  # Ensure it's a file
+                task.logger.report_image("debug_samples", image_name, iteration=0, image=image_path)
+        task.upload_artifact(name="show_dir", artifact_object=args.show_dir)
+
     rank, _ = get_dist_info()
     if rank == 0:
         if args.out:
