@@ -80,6 +80,12 @@ data = dict(
                        # img_prefix=data_root + 'photomontages/round_4/',
                        img_prefix=data_root + '',
                        pipeline=train_pipeline),
+                   dict(
+                       type=dataset_type,
+                       ann_file=data_root + 'photomontages_round_5_as_coco_annotations.json',
+                       # img_prefix=data_root + 'photomontages/round_5/',
+                       img_prefix=data_root + '',
+                       pipeline=train_pipeline),
                ]),
     val=dict(
         type=dataset_type,
