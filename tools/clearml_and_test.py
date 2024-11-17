@@ -242,7 +242,7 @@ def main():
                 cfg.data.test.pipeline)
     elif isinstance(cfg.data.test, list):
         for ds_cfg in cfg.data.test:
-            ds_cfg.test_mode = True  # not enforcing test mode to allow for visualization of annotations
+            ds_cfg.test_mode = True
         # TODO: not enforcing test mode is required for allowing visualization of annotations; however, enforcing test mode is required for the evaluation to work
         if cfg.data.test_dataloader.get('samples_per_gpu', 1) > 1:
             for ds_cfg in cfg.data.test:
