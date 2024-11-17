@@ -152,7 +152,7 @@ def main():
     if os.environ.get('CHOICE_DATASET') == 'RobotA':
         print("Using RobotA dataset")
         # robota = clearml.Dataset.get(dataset_id='4de72c7d8fc9489fb3b1bc292b0fb0e7')
-        robota = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='RobotA', dataset_version='1.2.0')
+        robota = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='RobotA', dataset_version='1.2.0')  # TODO: consider using the latest version
         os.environ['MMDET_DATASETS'] = robota.get_local_copy() + '/'
     elif os.environ.get('CHOICE_DATASET') == 'LabA':
         print("Using LabA dataset")
