@@ -18,7 +18,7 @@ train_pipeline = [
     dict(type='DefaultFormatBundle'),
     dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels']),
 ]
-val_pipeline = [
+val_pipeline = [  # TODO: also load annotations, since this is not a blind test!
     dict(type='LoadImageFromFile'),
     dict(
         type='MultiScaleFlipAug',
@@ -29,7 +29,7 @@ val_pipeline = [
             dict(type='RandomFlip'),
             dict(type='Normalize', **img_norm_cfg),
             dict(type='Pad', size_divisor=32),
-            dict(type='ImageToTensor', keys=['img']),
+            dict(type='DefaultFormatBundle'),
             dict(type='Collect', keys=['img']),
         ])
 ]
@@ -97,7 +97,7 @@ data = dict(
         type=dataset_type,
         ann_file=data_root + 'as_yolo_as_coco_ann_test.json',
         img_prefix=data_root + 'as_yolo/images/',
-        pipeline=test_pipeline,
+        pipeline=val_pipeline,
         test_mode=False)
 )
 evaluation = dict(interval=1, metric='bbox')
