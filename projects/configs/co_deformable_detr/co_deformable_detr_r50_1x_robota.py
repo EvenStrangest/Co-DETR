@@ -1,9 +1,21 @@
 from os import environ
 
-_base_ = [
-    '../_base_/datasets/laba_detection.py' if environ.get('CHOICE_DATASET') == 'LabA' else '../_base_/datasets/robota_detection.py',
-    '../_base_/default_runtime.py'
-]
+_base_ = ['../_base_/default_runtime.py']
+if environ.get('CHOICE_DATASET') == 'LabA':
+    _base_.append('../_base_/datasets/laba_detection.py')
+elif environ.get('CHOICE_DATASET') == 'LabC':
+    _base_.append('../_base_/datasets/laba_detection.py')
+    test_data = dict()  # TODO: complete this!!!
+    raise NotImplementedError('LabC dataset not yet implemented here!')
+elif environ.get('CHOICE_DATASET') == 'RobotA1ofeach':
+    _base_.append('../_base_/datasets/robota_detection.py')
+    from .._base_.datasets.robota_detection import data_root as robota_data_root
+    test_data=dict(
+        ann_file=robota_data_root + 'raw_images.json',
+        img_prefix=robota_data_root + 'raw_images/')
+    raise NotImplementedError('Provide the RobotA1ofeach paths!')
+elif environ.get('CHOICE_DATASET') == 'RobotA':
+    _base_.append('../_base_/datasets/robota_detection.py')
 
 # model settings
 num_dec_layer = 6
@@ -301,6 +313,12 @@ data = dict(
     # val=dict(pipeline=test_pipeline),
     # test=dict(pipeline=test_pipeline)
 )
+if 'test_data' in locals():
+    data['test'] = test_data
+    # TODO: this way of doing things is entirely barbaric!
+    #  better to introduce new a new key in the data dict,
+    #  and switch keys within clearml_and_test.py
+    #  in response to command-line arguments!
 # optimizer
 optimizer = dict(
     type='AdamW',

@@ -128,9 +128,15 @@ def main():
     elif os.environ.get('CHOICE_DATASET') == 'LabA':
         # set the project name
         task_name = 'EvalLA'
-    else:
+    elif os.environ.get('CHOICE_DATASET') == 'LabC':
+        # set the project name
+        task_name = 'EvalLC'
+    elif os.environ.get('CHOICE_DATASET') == 'COCO':
         # set the project name
         task_name = 'EvalCOCO'
+    else:
+        # set the project name
+        task_name = 'EvalUnknown'
 
     args = parse_args()
 
@@ -149,20 +155,27 @@ def main():
     # task.execute_remotely(queue_name="default")
 
     # set environment variable for the dataset path
-    if os.environ.get('CHOICE_DATASET') == 'RobotA':
+    if os.environ.get('CHOICE_DATASET') == 'RobotA' or os.environ.get('CHOICE_DATASET') == 'RobotA1ofeach':
         print("Using RobotA dataset")
         # robota = clearml.Dataset.get(dataset_id='4de72c7d8fc9489fb3b1bc292b0fb0e7')
-        robota = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='RobotA', dataset_version='1.2.0')  # TODO: consider using the latest version
+        raise NotImplementedError("Upload RobotA v2.0.0 to include RobotA1ofeach! Then update it to v2.1.0 to reflect the correct category_ids.")
+        robota = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='RobotA', dataset_version='2.0.0')
         os.environ['MMDET_DATASETS'] = robota.get_local_copy() + '/'
     elif os.environ.get('CHOICE_DATASET') == 'LabA':
         print("Using LabA dataset")
         laba = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='LabA', dataset_version='1.0.0')
         os.environ['MMDET_DATASETS'] = laba.get_local_copy() + '/'
-    else:
+    elif os.environ.get('CHOICE_DATASET') == 'LabC':
+        print("Using LabC dataset")
+        labc = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='LabC', dataset_version='1.0.0')
+        os.environ['MMDET_DATASETS'] = labc.get_local_copy() + '/'
+    elif os.environ.get('CHOICE_DATASET') == 'COCO':
         print("Using MS COCO dataset")
         # mscoco = clearml.Dataset.get(dataset_id='eaeccf28c682478c9badb6d5c5700437')
         mscoco = clearml.Dataset.get(dataset_project='MS_COCO', dataset_name='MS_COCO_2017', dataset_version='1.0.0')
         os.environ['MMDET_DATASETS'] = mscoco.get_local_copy() + '/'
+    else:
+        print(f"Using dataset from {os.environ.get('MMDET_DATASETS')}")
 
     assert args.out or args.eval or args.format_only or args.show \
         or args.show_dir, \
@@ -261,7 +274,7 @@ def main():
         json_file = osp.join(args.work_dir, f'eval_{timestamp}.json')
 
     # build the dataloader
-    dataset = build_dataset(cfg.data.test)
+    dataset = build_dataset(cfg.data.test)  # TODO: this is a way to access other sets within a dataset
     data_loader = build_dataloader(dataset, **test_loader_cfg)
 
     # build the model and load checkpoint
