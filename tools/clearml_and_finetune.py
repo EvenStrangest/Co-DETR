@@ -115,7 +115,7 @@ def main():
     if os.environ.get('CHOICE_DATASET') == 'RobotA':
         # set the project name
         task_name = 'FtRA'
-        task_name += '_with_Round4and5'
+        task_name += '_with_Round4and5more'
     else:
         # set the project name
         task_name = 'FinetuneCOCO'

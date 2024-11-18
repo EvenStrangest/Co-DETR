@@ -8,7 +8,8 @@ _base_ = [
 # load_from = 'https://files.clear.ml/Co-DETR/FinetuneRobotA%20lr%201e-5%20neck%20lr%20factor%200.25.b10ab572e11444dc8b47cbddb867d420/models/epoch_1.pth'
 # load_from = 'https://files.clear.ml/Co-DETR/FinetuneRobotA.bdeff4043035447c885ca769ef7673a4/models/epoch_2.pth'
 # load_from = 'https://files.clear.ml/Co-DETR/FinetuneRobotA_with_Round2_backbone_lrm0.1.131b8e106c7143028650f55a8b786848/models/epoch_2.pth'
-load_from = 'https://files.clear.ml/Co-DETR/FtRA_with_Round4_only.86d5cf5726a244a4a4b77019772d9d18/models/epoch_3.pth'
+# load_from = 'https://files.clear.ml/Co-DETR/FtRA_with_Round4_only.86d5cf5726a244a4a4b77019772d9d18/models/epoch_3.pth'
+load_from = 'https://files.clear.ml/Co-DETR/FtRA_with_Round4and5.1844c666b4394c668cf6b41211754744/models/epoch_3.pth'
 # resume_from = ''
 
 model = dict(
@@ -40,12 +41,12 @@ optimizer = dict(
 # Learning rate schedule
 lr_config = dict(
     policy='step',
-    step=[1],  # Adjust steps based on total epochs
-    gamma=0.1
+    step=[1, 2],  # Adjust steps based on total epochs
+    gamma=0.9
 )
 
 # Total epochs
-total_epochs = 3
+total_epochs = 4
 runner = dict(type='EpochBasedRunner', max_epochs=total_epochs)
 
 # Runtime settings
