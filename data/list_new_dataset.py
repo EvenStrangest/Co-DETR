@@ -21,7 +21,7 @@ for img_info in img_infos:
 img_infos = sorted(img_infos, key=lambda x: x['filename'])
 
 # 2 convert to coco format data
-classes = [f'AR{i:02}' for i in range(1, 16)]  # TODO: is this really correct?
+classes = [f'AR{i:02}' for i in range(1, 16)]
 print(f"Classes: {classes}")
 coco_info = cvt_to_coco_json(img_infos, classes)
 

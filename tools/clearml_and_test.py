@@ -155,6 +155,7 @@ def main():
     # task.execute_remotely(queue_name="default")
 
     # set environment variable for the dataset path
+    override_checkpoint_classes = True  # TODO: eventually, once we train models with the new mapping, we can turn this off
     if os.environ.get('CHOICE_DATASET') == 'RobotA':
         print("Using RobotA dataset")
         # robota = clearml.Dataset.get(dataset_id='4de72c7d8fc9489fb3b1bc292b0fb0e7')
@@ -289,10 +290,10 @@ def main():
         model = fuse_conv_bn(model)
     # old versions did not save class info in checkpoints, this walkaround is
     # for backward compatibility
-    if 'CLASSES' in checkpoint.get('meta', {}):
-        model.CLASSES = checkpoint['meta']['CLASSES']
-    else:
+    if override_checkpoint_classes or 'CLASSES' not in checkpoint.get('meta', {}):
         model.CLASSES = dataset.CLASSES
+    else:
+        model.CLASSES = checkpoint['meta']['CLASSES']
 
     # TODO: export this to args !!!
     if args.show_dir is not None and not distributed:
