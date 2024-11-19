@@ -162,6 +162,7 @@ def main():
         robota = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='RobotA', dataset_version='1.2.0')
         os.environ['MMDET_DATASETS'] = robota.get_local_copy() + '/'
     elif os.environ.get('CHOICE_DATASET') == 'RobotA1ofeach':
+        # TODO: eventually merge this into the RobotA dataset
         os.environ['MMDET_DATASETS'] = '/data/'
     elif os.environ.get('CHOICE_DATASET') == 'LabA':
         print("Using LabA dataset")
