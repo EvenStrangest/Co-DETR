@@ -51,6 +51,12 @@
             <option name="hostPath" value="$PROJECT_DIR$/" />
             <option name="readOnly" value="false" />
           </DockerVolumeBindingImpl>
+          <DockerVolumeBindingImpl>
+            <option name="containerPath" value="/data" />
+            <option name="editable" value="true" />
+            <option name="hostPath" value="C:\Users\asafe\PycharmProjects\local_data" />
+            <option name="readOnly" value="false" />
+          </DockerVolumeBindingImpl>
         </list>
       </option>
     </EXTENSION>
@@ -63,7 +69,7 @@
       </option>
     </PathMappingSettings>
     <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tools/clearml_and_test.py" />
-    <option name="PARAMETERS" value="projects/configs/co_deformable_detr/co_deformable_detr_r50_1x_robota.py https://files.clear.ml/Co-DETR/FtRA_with_Round4and5.1844c666b4394c668cf6b41211754744/models/epoch_3.pth --eval bbox --show-dir /logs/robota_inference_output_Ftwith4n5" />
+    <option name="PARAMETERS" value="projects/configs/co_deformable_detr/co_deformable_detr_r50_1x_robota.py https://files.clear.ml/Co-DETR/FtRA_with_Round4and5.1844c666b4394c668cf6b41211754744/models/epoch_3.pth --eval bbox --show-dir /logs/robota1oe_inference_output" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />
     <option name="MODULE_MODE" value="false" />

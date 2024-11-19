@@ -9,9 +9,10 @@ elif environ.get('CHOICE_DATASET') == 'LabC':
     raise NotImplementedError('LabC dataset not yet implemented here!')
 elif environ.get('CHOICE_DATASET') == 'RobotA1ofeach':
     _base_.append('../_base_/datasets/robota_detection.py')
-    from .._base_.datasets.robota_detection import data_root as robota_data_root
+    # from .._base_.datasets.robota_detection import data_root as robota_data_root
+    robota_data_root = 'data/Robot-controlled A/'
     test_data=dict(
-        ann_file=robota_data_root + 'photomontages_round_6_as_coco_annotations.json',
+        ann_file=robota_data_root + 'one_of_each_class_as_coco_annotations.json',
         img_prefix=robota_data_root + 'one_of_each_class/')
 elif environ.get('CHOICE_DATASET') == 'RobotA':
     _base_.append('../_base_/datasets/robota_detection.py')

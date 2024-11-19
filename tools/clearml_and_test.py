@@ -155,12 +155,13 @@ def main():
     # task.execute_remotely(queue_name="default")
 
     # set environment variable for the dataset path
-    if os.environ.get('CHOICE_DATASET') == 'RobotA' or os.environ.get('CHOICE_DATASET') == 'RobotA1ofeach':
+    if os.environ.get('CHOICE_DATASET') == 'RobotA':
         print("Using RobotA dataset")
         # robota = clearml.Dataset.get(dataset_id='4de72c7d8fc9489fb3b1bc292b0fb0e7')
-        raise NotImplementedError("Upload RobotA v2.0.0 to include RobotA1ofeach! Then update it to v2.1.0 to reflect the correct category_ids.")
-        robota = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='RobotA', dataset_version='2.0.0')
+        robota = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='RobotA', dataset_version='1.2.0')
         os.environ['MMDET_DATASETS'] = robota.get_local_copy() + '/'
+    elif os.environ.get('CHOICE_DATASET') == 'RobotA1ofeach':
+        os.environ['MMDET_DATASETS'] = '/data/'
     elif os.environ.get('CHOICE_DATASET') == 'LabA':
         print("Using LabA dataset")
         laba = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='LabA', dataset_version='1.0.0')
