@@ -7,8 +7,8 @@ from tools.dataset_converters.images2coco import collect_image_infos, cvt_to_coc
 import mmcv
 
 
-images_path = r"H:/Shared drives/RnD/Data/Robot-controlled A/one_of_each_class"
-annotations_path = r"H:/Shared drives/RnD/Data/Robot-controlled A/one_of_each_class_as_coco_annotations.json"
+images_path = r"H:/Shared drives/RnD/Data/Lab C/crop_one"
+annotations_path = r"H:/Shared drives/RnD/Data/Lab C/crop_one_as_coco_annotations.json"
 
 # 1 load image list info
 print(f'Collecting image infos from {images_path}')
