@@ -11,9 +11,8 @@ elif environ.get('CHOICE_DATASET') == 'RobotA1ofeach':
     _base_.append('../_base_/datasets/robota_detection.py')
     from .._base_.datasets.robota_detection import data_root as robota_data_root
     test_data=dict(
-        ann_file=robota_data_root + 'raw_images.json',
-        img_prefix=robota_data_root + 'raw_images/')
-    raise NotImplementedError('Provide the RobotA1ofeach paths!')
+        ann_file=robota_data_root + 'photomontages_round_6_as_coco_annotations.json',
+        img_prefix=robota_data_root + 'one_of_each_class/')
 elif environ.get('CHOICE_DATASET') == 'RobotA':
     _base_.append('../_base_/datasets/robota_detection.py')
 
