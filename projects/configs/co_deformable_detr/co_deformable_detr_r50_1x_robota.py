@@ -1,12 +1,16 @@
 from os import environ
 
+from projects.configs.co_dino.co_dino_5scale_lsj_swin_large_16e_o365tolvis import data_root
+
 _base_ = ['../_base_/default_runtime.py']
 if environ.get('CHOICE_DATASET') == 'LabA':
     _base_.append('../_base_/datasets/laba_detection.py')
 elif environ.get('CHOICE_DATASET') == 'LabC':
     _base_.append('../_base_/datasets/laba_detection.py')
-    test_data = dict()  # TODO: complete this!!!
-    raise NotImplementedError('LabC dataset not yet implemented here!')
+    test_data = dict(
+        ann_file='data/Lab C/crop_one_as_coco_annotations.json',
+        img_prefix='data/Lab C/crop_one/')
+    data_root = 'data/Lab C/'
 elif environ.get('CHOICE_DATASET') == 'RobotA1ofeach':
     _base_.append('../_base_/datasets/robota_detection.py')
     # from .._base_.datasets.robota_detection import data_root as robota_data_root

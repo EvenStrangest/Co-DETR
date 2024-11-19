@@ -170,7 +170,7 @@ def main():
         os.environ['MMDET_DATASETS'] = laba.get_local_copy() + '/'
     elif os.environ.get('CHOICE_DATASET') == 'LabC':
         print("Using LabC dataset")
-        labc = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='LabC', dataset_version='1.0.0')
+        labc = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='Lab C', dataset_version='1.0.0')
         os.environ['MMDET_DATASETS'] = labc.get_local_copy() + '/'
     elif os.environ.get('CHOICE_DATASET') == 'COCO':
         print("Using MS COCO dataset")
