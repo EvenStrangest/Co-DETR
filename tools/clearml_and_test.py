@@ -155,7 +155,7 @@ def main():
     # task.execute_remotely(queue_name="default")
 
     # set environment variable for the dataset path
-    override_checkpoint_classes = True  # TODO: eventually, once we train models with the new mapping, we can turn this off
+    alternate_classes_attr = 'CLASSES_for_visualization'  # TODO: eventually, once we train models with the new mapping, we can turn this off
     if os.environ.get('CHOICE_DATASET') == 'RobotA':
         print("Using RobotA dataset")
         # robota = clearml.Dataset.get(dataset_id='4de72c7d8fc9489fb3b1bc292b0fb0e7')
@@ -181,6 +181,7 @@ def main():
         # mscoco = clearml.Dataset.get(dataset_id='eaeccf28c682478c9badb6d5c5700437')
         mscoco = clearml.Dataset.get(dataset_project='MS_COCO', dataset_name='MS_COCO_2017', dataset_version='1.0.0')
         os.environ['MMDET_DATASETS'] = mscoco.get_local_copy() + '/'
+        alternate_classes_attr = None
     else:
         print(f"Using dataset from {os.environ.get('MMDET_DATASETS')}")
 
@@ -211,7 +212,7 @@ def main():
 
     print(f'Config:\n{cfg.pretty_text}')
 
-    # set multi-process settings
+    # set multiprocess settings
     setup_multi_processes(cfg)
 
     # set cudnn_benchmark
@@ -295,10 +296,12 @@ def main():
         model = fuse_conv_bn(model)
     # old versions did not save class info in checkpoints, this walkaround is
     # for backward compatibility
-    if override_checkpoint_classes or 'CLASSES' not in checkpoint.get('meta', {}):
-        model.CLASSES = dataset.CLASSES
-    else:
+    if alternate_classes_attr is not None and hasattr(dataset, alternate_classes_attr):
+        model.CLASSES = dataset.getattr(alternate_classes_attr)
+    elif 'CLASSES' in checkpoint.get('meta', {}):
         model.CLASSES = checkpoint['meta']['CLASSES']
+    else:
+        model.CLASSES = dataset.CLASSES
 
     # TODO: export this to args !!!
     if args.show_dir is not None and not distributed:
