@@ -1,7 +1,5 @@
 from os import environ
 
-from projects.configs.co_dino.co_dino_5scale_lsj_swin_large_16e_o365tolvis import data_root
-
 _base_ = ['../_base_/default_runtime.py']
 if environ.get('CHOICE_DATASET') == 'LabA':
     _base_.append('../_base_/datasets/laba_detection.py')
