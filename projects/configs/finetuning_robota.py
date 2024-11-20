@@ -9,7 +9,8 @@ _base_ = [
 # load_from = 'https://files.clear.ml/Co-DETR/FinetuneRobotA.bdeff4043035447c885ca769ef7673a4/models/epoch_2.pth'
 # load_from = 'https://files.clear.ml/Co-DETR/FinetuneRobotA_with_Round2_backbone_lrm0.1.131b8e106c7143028650f55a8b786848/models/epoch_2.pth'
 # load_from = 'https://files.clear.ml/Co-DETR/FtRA_with_Round4_only.86d5cf5726a244a4a4b77019772d9d18/models/epoch_3.pth'
-load_from = 'https://files.clear.ml/Co-DETR/FtRA_with_Round4and5.1844c666b4394c668cf6b41211754744/models/epoch_3.pth'
+# load_from = 'https://files.clear.ml/Co-DETR/FtRA_with_Round4and5.1844c666b4394c668cf6b41211754744/models/epoch_3.pth'
+load_from = 'https://files.clear.ml/Co-DETR/FtRA_with_Round4and5more.45bcbfcf7d0c4fd68ab8c7a8ce838b41/models/epoch_4.pth'
 # resume_from = ''
 
 model = dict(
@@ -29,7 +30,7 @@ optimizer = dict(
         custom_keys={
             # Freeze the backbone by setting its learning rate to zero
             'backbone': dict(lr_mult=0.0),
-            'neck': dict(lr_mult=0.25),
+            'neck': dict(lr_mult=0.5),
             # Optionally adjust other layers
         }
     )
