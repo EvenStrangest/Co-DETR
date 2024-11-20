@@ -302,7 +302,7 @@ def main():
 
     # TODO: export this to args !!!
     if args.show_dir is not None and not distributed:
-        show_results_kwargs = dict(thickness = 4, font_size = 40,)
+        show_results_kwargs = dict(thickness = 4, font_size = 34,)
     else:
         show_results_kwargs = dict()
 
