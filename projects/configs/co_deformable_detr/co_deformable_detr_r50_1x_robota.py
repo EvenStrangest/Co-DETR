@@ -121,7 +121,7 @@ model = dict(
             gamma=2.0,
             alpha=0.25,
             loss_weight=2.0),
-        loss_bbox=dict(type='L1Loss', loss_weight=5.0),
+        loss_bbox=dict(type='L1Loss', loss_weight=5.0),  # TODO: consider reducing weight
         loss_iou=dict(type='GIoULoss', loss_weight=2.0)),
     roi_head=[dict(
         type='CoStandardRoIHead',
@@ -177,7 +177,7 @@ model = dict(
             assigner=dict(
                 type='HungarianAssigner',
                 cls_cost=dict(type='FocalLossCost', weight=2.0),
-                reg_cost=dict(type='BBoxL1Cost', weight=5.0, box_format='xywh'),
+                reg_cost=dict(type='BBoxL1Cost', weight=5.0, box_format='xywh'),  # TODO: consider reducing weight
                 iou_cost=dict(type='IoUCost', iou_mode='giou', weight=2.0))),
         dict(
             rpn=dict(
