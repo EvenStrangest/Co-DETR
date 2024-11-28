@@ -297,7 +297,7 @@ def main():
     # old versions did not save class info in checkpoints, this walkaround is
     # for backward compatibility
     if alternate_classes_attr is not None and hasattr(dataset, alternate_classes_attr):
-        model.CLASSES = dataset.getattr(alternate_classes_attr)
+        model.CLASSES = dataset.__getattribute__(alternate_classes_attr)
     elif 'CLASSES' in checkpoint.get('meta', {}):
         model.CLASSES = checkpoint['meta']['CLASSES']
     else:
