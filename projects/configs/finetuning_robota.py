@@ -3,7 +3,7 @@
 
 # Specify the checkpoint to load pre-trained weights
 _base_ = [
-    './co_deformable_detr/co_deformable_detr_r50_1x_robota.py'
+    './co_deformable_detr/co_deformable_detr_diet_r50_1x_robota.py'
 ]
 # load_from = 'https://files.clear.ml/Co-DETR/FinetuneRobotA%20lr%201e-5%20neck%20lr%20factor%200.25.b10ab572e11444dc8b47cbddb867d420/models/epoch_1.pth'
 # load_from = 'https://files.clear.ml/Co-DETR/FinetuneRobotA.bdeff4043035447c885ca769ef7673a4/models/epoch_2.pth'
@@ -11,7 +11,8 @@ _base_ = [
 # load_from = 'https://files.clear.ml/Co-DETR/FtRA_with_Round4_only.86d5cf5726a244a4a4b77019772d9d18/models/epoch_3.pth'
 # load_from = 'https://files.clear.ml/Co-DETR/FtRA_with_Round4and5.1844c666b4394c668cf6b41211754744/models/epoch_3.pth'
 # load_from = 'https://files.clear.ml/Co-DETR/FtRA_with_Round4and5more.45bcbfcf7d0c4fd68ab8c7a8ce838b41/models/epoch_4.pth'
-load_from = 'https://files.clear.ml/Co-DETR/FtRA_with_Rnd4n5_withAR14.756aa029cef947f084477505dd05f904/models/epoch_2.pth'
+# load_from = 'https://files.clear.ml/Co-DETR/FtRA_with_Rnd4n5_withAR14.756aa029cef947f084477505dd05f904/models/epoch_2.pth'
+load_from = 'https://files.clear.ml/Co-DETR/FtRA_wRnd4n5_wAR14_BBfrozen2.91e85f11eafd40d9a7f3c4b44dce6696/models/epoch_1.pth'
 # resume_from = ''
 
 model = dict(
@@ -30,8 +31,8 @@ optimizer = dict(
     paramwise_cfg=dict(
         custom_keys={
             # Freeze the backbone by setting its learning rate to zero
-            'backbone': dict(lr_mult=0.25),
-            'neck': dict(lr_mult=0.5),
+            'backbone': dict(lr_mult=0.1),
+            'neck': dict(lr_mult=0.55),
             # Optionally adjust other layers
         }
     )
