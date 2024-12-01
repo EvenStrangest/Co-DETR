@@ -1,5 +1,8 @@
+import os
+
 from mmcv.utils import print_log
 import mmcv
+from clearml import Dataset
 
 
 def fetch_clearml_datasets(cfg, logger=None):
@@ -8,25 +11,37 @@ def fetch_clearml_datasets(cfg, logger=None):
     assert isinstance(cfg, mmcv.Config), \
         f'cfg got wrong type: {type(cfg)}, expected mmcv.Config'
 
-    if 'MMDET_DATASETS' in os.environ:
-        dst_root = os.environ['MMDET_DATASETS']
-        print_log(f'MMDET_DATASETS has been set to be {dst_root}.'
-                  f'Using {dst_root} as data root.')
-    else:
-        return
+    def fetch_local(mock_clearml_uri: str):
+        if not mock_clearml_uri.startswith('clearml://'):
+            return mock_clearml_uri
 
-    def update(cfg, src_str, dst_str):
+        try:
+            dataset_name_and_version, internal_path = mock_clearml_uri.lstrip('clearml://').split('/', 2)
+            dataset_name, dataset_version = dataset_name_and_version.split(':')
+        except Exception as e:
+            raise ValueError(f'Invalid mock ClearML URI: {mock_clearml_uri}')
+
+        # TODO: also get dataset_project from the mock URI!
+        dataset = Dataset.get(dataset_project='SurgicalTools', dataset_name=dataset_name, dataset_version=dataset_version)
+        dataset_path = dataset.get_local_copy()
+        if isinstance(dataset_path, str) and dataset_path:  # Ensure it's a valid non-empty string
+            return dataset_path
+
+        local_uri = os.path.join(dataset_path, internal_path)
+
+        return local_uri
+
+    def update(cfg):
         for k, v in cfg.items():
             if isinstance(v, mmcv.ConfigDict):
-                update(cfg[k], src_str, dst_str)
+                update(cfg[k])
             if isinstance(v, list):
                 for i, _ in enumerate(v):
                     if isinstance(v[i], mmcv.ConfigDict):
-                        update(v[i], src_str, dst_str)
-                    elif isinstance(v[i], str) and src_str in v[i]:
-                        v[i] = v[i].replace(src_str, dst_str)
-            if isinstance(v, str) and src_str in v:
-                cfg[k] = v.replace(src_str, dst_str)
+                        update(v[i])
+                    elif isinstance(v[i], str) and v[i].startswith('clearml://'):
+                        v[i] = fetch_local(v[i])
+            if isinstance(v, str) and v.startswith('clearml://'):
+                cfg[k] = fetch_local(v)
 
-    update(cfg.data, cfg.data_root, dst_root)
-    cfg.data_root = dst_root
+    update(cfg.data)
