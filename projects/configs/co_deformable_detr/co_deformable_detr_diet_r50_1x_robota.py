@@ -37,8 +37,8 @@ model = dict(
         num_stages=4,
         out_indices=(1, 2, 3),
         frozen_stages=1,
-        norm_cfg=dict(type='BN', requires_grad=False),
-        norm_eval=True,
+        norm_cfg=dict(type='BN', requires_grad=False),  # TODO: if learning normalization parameters, then change requires_grad=True
+        norm_eval=True,  # TODO: maybe better to learn the normalization parameters?
         style='pytorch',
         init_cfg=dict(type='Pretrained', checkpoint='torchvision://resnet50')),
     neck=dict(
