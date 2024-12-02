@@ -93,12 +93,21 @@ data = dict(
         img_prefix=data_root + 'as_yolo/images/',
         pipeline=val_pipeline,
         test_mode=False),
-    test=dict(
-        type=dataset_type,
-        ann_file=data_root + 'as_yolo_as_coco_ann_test.json',
-        img_prefix=data_root + 'as_yolo/images/',
-        pipeline=val_pipeline,
-        test_mode=False)
+    test=dict(type='ConcatDataset',
+              datasets=[
+                  dict(
+                      type=dataset_type,
+                      ann_file=data_root + 'as_yolo_as_coco_ann_test.json',
+                      img_prefix=data_root + 'as_yolo/images/',
+                      pipeline=val_pipeline,
+                      test_mode=False),
+                  dict(
+                      type=dataset_type,
+                      ann_file=data_root + 'photomontages_round_5_as_coco_annotations.json',
+                      # img_prefix=data_root + 'photomontages/round_5/',
+                      img_prefix=data_root + '',
+                      pipeline=train_pipeline),
+              ])
 )
 evaluation = dict(interval=1, metric='bbox')
 
