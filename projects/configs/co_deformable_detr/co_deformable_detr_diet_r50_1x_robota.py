@@ -37,7 +37,7 @@ model = dict(
         num_stages=4,
         out_indices=(1, 2, 3),
         frozen_stages=1,
-        norm_cfg=dict(type='BN', requires_grad=False),  # TODO: if learning normalization parameters, then change requires_grad=True
+        norm_cfg=dict(type='BN', requires_grad=False),  # TODO: if learning normalization parameters, then probably need to change requires_grad=True
         norm_eval=True,  # TODO: maybe better to learn the normalization parameters?
         style='pytorch',
         init_cfg=dict(type='Pretrained', checkpoint='torchvision://resnet50')),
@@ -52,8 +52,8 @@ model = dict(
     rpn_head=None,
     query_head=dict(
         type='CoDeformDETRHead',
-        num_query=300,  # TODO: consider increasing this
-        num_classes=80,  # TODO: does this need to be corrected?
+        num_query=500,
+        num_classes=11,
         in_channels=2048,
         sync_cls_avg_factor=True,
         with_box_refine=True,
@@ -192,8 +192,8 @@ train_pipeline = [
 # ]
 
 data = dict(
-    samples_per_gpu=3,  # TODO: consider increasing this
-    workers_per_gpu=3,  # TODO: consider increasing this
+    samples_per_gpu=4,  # TODO: consider increasing this
+    workers_per_gpu=4,  # TODO: consider increasing this
     train=dict(filter_empty_gt=False, pipeline=train_pipeline),
     # val=dict(pipeline=test_pipeline),
     # test=dict(pipeline=test_pipeline)
