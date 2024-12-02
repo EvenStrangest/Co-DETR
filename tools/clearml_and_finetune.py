@@ -144,6 +144,9 @@ def main():
             for i in range(torch.cuda.device_count()):
                 print(f"  - {torch.cuda.get_device_name(i)}")
 
+    if not torch.cuda.is_available() and is_running_remotely():
+        raise RuntimeError("No CUDA GPUs are available at initialization.")
+
     if os.name == 'posix':
         # list the mounted file systems
         os.system('df -h')
