@@ -82,8 +82,8 @@ data = dict(
                        pipeline=train_pipeline),
                    dict(
                        type=dataset_type,
-                       ann_file=data_root + 'photomontages_round_5_as_coco_annotations.json',
-                       # img_prefix=data_root + 'photomontages/round_5/',
+                       ann_file=data_root + 'photomontages_round_5again_as_coco_annotations.json',
+                       # img_prefix=data_root + 'photomontages/round_5again/',
                        img_prefix=data_root + '',
                        pipeline=train_pipeline),
                ]),

@@ -159,7 +159,7 @@ def main():
     if os.environ.get('CHOICE_DATASET') == 'RobotA':
         print("Using RobotA dataset")
         # robota = clearml.Dataset.get(dataset_id='4de72c7d8fc9489fb3b1bc292b0fb0e7')
-        robota = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='RobotA_with_Photomontage_Round5', dataset_version='1.0.0')
+        robota = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='RobotA_with_Photomontage_Round5again', dataset_version='1.0.0')
         os.environ['MMDET_DATASETS'] = robota.get_local_copy() + '/'
     elif os.environ.get('CHOICE_DATASET') == 'RobotA1ofeach':
         # TODO: eventually merge this into the RobotA dataset
