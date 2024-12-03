@@ -166,7 +166,7 @@ def main():
         os.environ['MMDET_DATASETS'] = '/data/'
     elif os.environ.get('CHOICE_DATASET') == 'LabA':
         print("Using LabA dataset")
-        laba = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='LabA', dataset_version='1.0.0')
+        laba = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='LabA', dataset_version='2.0.0')
         os.environ['MMDET_DATASETS'] = laba.get_local_copy() + '/'
     elif os.environ.get('CHOICE_DATASET') == 'LabC':
         print("Using LabC dataset")

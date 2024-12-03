@@ -49,10 +49,18 @@ data = dict(
     #     ann_file=data_root + 'as_yolo_as_coco_ann_val.json',
     #     img_prefix=data_root + 'as_yolo/images/',
     #     pipeline=test_pipeline),
-    test=dict(
-        type=dataset_type,
-        ann_file=data_root + 'raw_images.json',
-        img_prefix=data_root + 'raw_images/',
-        pipeline=test_pipeline)
+    test=dict(type='ConcatDataset',
+              datasets=[
+                  dict(
+                      type=dataset_type,
+                      ann_file=data_root + 'raw_images.json',
+                      img_prefix=data_root + 'raw_images/',
+                      pipeline=test_pipeline),
+                  dict(
+                      type=dataset_type,
+                      ann_file=data_root + 'crop_manual_choice_one_two_as_coco_annotations.json',
+                      img_prefix=data_root + 'crop_manual_choice_one_two/',
+                      pipeline=test_pipeline),
+              ])
 )
 evaluation = dict(interval=1, metric='bbox')
