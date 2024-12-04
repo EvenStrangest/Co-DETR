@@ -59,12 +59,12 @@ data = dict(
                       img_prefix=data_root + 'raw_images/',
                       pipeline=test_pipeline,
                       test_mode=True),
-                  dict(
-                      type=dataset_type,
-                      ann_file=data_root + 'crop_manual_choice_one_two_as_coco_annotations.json',
-                      img_prefix=data_root + 'crop_manual_choice_one_two/',
-                      pipeline=test_pipeline,
-                      test_mode=True),
+                  # dict(
+                  #     type=dataset_type,
+                  #     ann_file=data_root + 'crop_manual_choice_one_two_as_coco_annotations.json',
+                  #     img_prefix=data_root + 'crop_manual_choice_one_two/',
+                  #     pipeline=test_pipeline,
+                  #     test_mode=True),
               ],
               separate_eval=True)
 )
