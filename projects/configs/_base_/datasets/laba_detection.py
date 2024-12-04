@@ -24,8 +24,8 @@ test_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(
         type='MultiScaleFlipAug',
-        img_scale=(1333, 800),
-        flip=False,
+        img_scale=(1333, 800),  # TODO: specify a list of scales in scale_factor instead!
+        flip=False,  # TODO: change to True and specify direction=['horizontal', 'vertical']
         transforms=[
             dict(type='Resize', keep_ratio=True),
             dict(type='RandomFlip'),
