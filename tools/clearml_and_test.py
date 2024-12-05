@@ -296,8 +296,18 @@ def main():
         model = fuse_conv_bn(model)
     # old versions did not save class info in checkpoints, this walkaround is
     # for backward compatibility
-    if alternate_classes_attr is not None and hasattr(dataset, alternate_classes_attr):
-        model.CLASSES = dataset.__getattribute__(alternate_classes_attr)
+    if alternate_classes_attr is not None:
+        if hasattr(dataset, alternate_classes_attr):
+            model.CLASSES = dataset.__getattribute__(alternate_classes_attr)
+        elif hasattr(dataset, 'datasets'):
+            for ds in dataset.datasets:
+                if hasattr(ds, alternate_classes_attr):
+                    model.CLASSES = ds.__getattribute__(alternate_classes_attr)
+                    break
+            else:
+                raise KeyError(f'Cannot find alternate classes info "{alternate_classes_attr}".')
+        else:
+            raise KeyError(f'Cannot find alternate classes info "{alternate_classes_attr}".')
     elif 'CLASSES' in checkpoint.get('meta', {}):
         model.CLASSES = checkpoint['meta']['CLASSES']
     else:
@@ -305,7 +315,7 @@ def main():
 
     # TODO: export this to args !!!
     if args.show_dir is not None and not distributed:
-        show_results_kwargs = dict(thickness = 4, font_size = 34,)
+        show_results_kwargs = dict(thickness = 2, font_size = 14,)
     else:
         show_results_kwargs = dict()
 

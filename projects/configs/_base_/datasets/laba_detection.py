@@ -24,9 +24,9 @@ test_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(
         type='MultiScaleFlipAug',
-        # img_scale=(1333, 800),
-        scale_factor = [1.2, 1.1, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5],
-        flip=True,
+        img_scale=(1333, 800),
+        # scale_factor = [1.2, 1.1, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5],
+        flip=False,
         flip_direction=['horizontal', 'vertical'],
         transforms=[
             dict(type='Resize', keep_ratio=True),
@@ -53,18 +53,18 @@ data = dict(
     #     pipeline=test_pipeline),
     test=dict(type='ConcatDataset',
               datasets=[
-                  dict(
-                      type=dataset_type,
-                      ann_file=data_root + 'raw_images.json',
-                      img_prefix=data_root + 'raw_images/',
-                      pipeline=test_pipeline,
-                      test_mode=True),
                   # dict(
                   #     type=dataset_type,
-                  #     ann_file=data_root + 'crop_manual_choice_one_two_as_coco_annotations.json',
-                  #     img_prefix=data_root + 'crop_manual_choice_one_two/',
+                  #     ann_file=data_root + 'raw_images.json',
+                  #     img_prefix=data_root + 'raw_images/',
                   #     pipeline=test_pipeline,
                   #     test_mode=True),
+                  dict(
+                      type=dataset_type,
+                      ann_file=data_root + 'crop_manual_choice_one_two_as_coco_annotations.json',
+                      img_prefix=data_root + 'crop_manual_choice_one_two/',
+                      pipeline=test_pipeline,
+                      test_mode=True),
               ],
               separate_eval=True)
 )
