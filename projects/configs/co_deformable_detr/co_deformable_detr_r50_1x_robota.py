@@ -6,8 +6,8 @@ if environ.get('CHOICE_DATASET') == 'LabA':
 elif environ.get('CHOICE_DATASET') == 'LabC':
     _base_.append('../_base_/datasets/laba_detection.py')
     test_data = dict(
-        ann_file='data/Lab C/crop_one_as_coco_annotations.json',
-        img_prefix='data/Lab C/crop_one/')
+        ann_file='data/Lab C/crop_two_as_coco_annotations.json',
+        img_prefix='data/Lab C/crop_two/')
     data_root = 'data/Lab C/'
 elif environ.get('CHOICE_DATASET') == 'LabD':
     _base_.append('../_base_/datasets/laba_detection.py')
@@ -327,6 +327,7 @@ if 'test_data' in locals():
     #  better to introduce new a new key in the data dict,
     #  and switch keys within clearml_and_test.py
     #  in response to command-line arguments!
+    del test_data
 # optimizer
 optimizer = dict(
     type='AdamW',
