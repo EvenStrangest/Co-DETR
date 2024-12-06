@@ -7,12 +7,15 @@ from tools.dataset_converters.images2coco import collect_image_infos, cvt_to_coc
 import mmcv
 
 
-images_path = r"H:/Shared drives/RnD/Data/Lab E/crop_one"
-annotations_path = r"H:/Shared drives/RnD/Data/Lab E/crop_one_as_coco_annotations.json"
+images_path = r"H:/Shared drives/RnD/Data/Lab E/whitebalanced"
+annotations_path = r"H:/Shared drives/RnD/Data/Lab E/whitebalanced_as_coco_annotations.json"
 
 # 1 load image list info
 print(f'Collecting image infos from {images_path}')
 img_infos = collect_image_infos(images_path)
+
+# exclude mask images
+img_infos = [img_info for img_info in img_infos if img_info['filename'].find('mask') == -1]
 
 for img_info in img_infos:
     img_info['filename'] = os.path.split(img_info['filename'])[1]
