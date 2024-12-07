@@ -21,6 +21,19 @@ class RobotaDataset(CocoDataset):
         'AR09 Lahey Traction Forceps 15.8',
         'AR14 Septum Forceps Hartman 20.0')
 
+    CLASSES_for_show = (
+        'Foerster Sponge',
+        'Towel Forceps 13.2',
+        'MIXTER Forceps  21.6',
+        'Michigan MIXTER Forceps 23.5',
+        'Metzenbaum-Nelson Scissors',
+        'Dissecting Scissors 23.0',
+        'Metzenbaum Scissors, straight 20.0',
+        'POTTS-SMITH  19.1',
+        'Mayo Scissors 17.3',
+        'Lahey Traction Forceps 15.8',
+        'Septum Forceps Hartman 20.0')
+
     PALETTE = [
         (211, 47, 47),    # Softer red
         (56, 142, 60),    # Softer green

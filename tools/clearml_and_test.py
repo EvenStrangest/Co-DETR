@@ -155,7 +155,8 @@ def main():
     # task.execute_remotely(queue_name="default")
 
     # set environment variable for the dataset path
-    alternate_classes_attr = 'CLASSES_for_visualization'  # TODO: eventually, once we train models with the new mapping, we can turn this off
+    alternate_classes_attr = 'CLASSES_for_show'  # TODO: eventually, once we train models with the new mapping, we can turn this off
+    # 'CLASSES_for_visualization'
     if os.environ.get('CHOICE_DATASET') == 'RobotA':
         print("Using RobotA dataset")
         # robota = clearml.Dataset.get(dataset_id='4de72c7d8fc9489fb3b1bc292b0fb0e7')
