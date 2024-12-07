@@ -63,7 +63,7 @@
       </option>
     </PathMappingSettings>
     <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tools/clearml_and_test.py" />
-    <option name="PARAMETERS" value="projects/configs/co_deformable_detr/co_deformable_detr_r50_1x_robota.py https://files.clear.ml/Co-DETR/FtRA_wRnd4n5_wAR14_BBfrz2_sansNMS.012f0409886a4441a85b84e46f2f9143/models/epoch_4.pth --eval bbox --show-dir /logs/labc_inference_output_wRnd4n5_BBfrz2_sansNMS_crop2" />
+    <option name="PARAMETERS" value="projects/configs/co_deformable_detr/co_deformable_detr_r50_1x_robota.py https://files.clear.ml/Co-DETR/FtRA_wRnd4n5_wAR14_BBfrz2_sansNMS.012f0409886a4441a85b84e46f2f9143/models/epoch_4.pth --eval bbox --show-dir /logs/labc_inference_output_wRnd4n5_BBfrz2_sansNMS_crop2_4show" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />
     <option name="MODULE_MODE" value="false" />
