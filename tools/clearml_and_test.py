@@ -173,12 +173,16 @@ def main():
         labc = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='LabC', dataset_version='2.0.0')
         os.environ['MMDET_DATASETS'] = labc.get_local_copy() + '/'
     elif os.environ.get('CHOICE_DATASET') == 'LabD':
-        print("Using LabC dataset")
+        print("Using LabD dataset")
         labc = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='LabD', dataset_version='1.0.0')
         os.environ['MMDET_DATASETS'] = labc.get_local_copy() + '/'
     elif os.environ.get('CHOICE_DATASET') == 'LabE':
-        print("Using LabC dataset")
+        print("Using LabE dataset")
         labc = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='LabE', dataset_version='1.0.0')
+        os.environ['MMDET_DATASETS'] = labc.get_local_copy() + '/'
+    elif os.environ.get('CHOICE_DATASET') == 'LabF':
+        print("Using LabF dataset")
+        labc = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name='LabF', dataset_version='1.0.0')
         os.environ['MMDET_DATASETS'] = labc.get_local_copy() + '/'
     elif os.environ.get('CHOICE_DATASET') == 'COCO':
         print("Using MS COCO dataset")

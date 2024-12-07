@@ -21,6 +21,12 @@ elif environ.get('CHOICE_DATASET') == 'LabE':
         ann_file='data/Lab E/whitebalanced_as_coco_annotations.json',
         img_prefix='data/Lab E/whitebalanced/')
     data_root = 'data/Lab E/'
+elif environ.get('CHOICE_DATASET') == 'LabE':
+    _base_.append('../_base_/datasets/laba_detection.py')
+    test_data = dict(
+        ann_file='data/Lab F/resized_recolored_as_coco_annotations.json',
+        img_prefix='data/Lab F/resized_recolored/')
+    data_root = 'data/Lab F/'
 elif environ.get('CHOICE_DATASET') == 'RobotA1ofeach':
     _base_.append('../_base_/datasets/robota_detection.py')
     # from .._base_.datasets.robota_detection import data_root as robota_data_root
