@@ -154,7 +154,7 @@ train_pipeline = [
                     allow_negative_crop=True),
                 dict(
                     type='Resize',
-                    img_scale=zip([int(_a) for _a in 1920 * linspace(0.2, 1.0, 10) // 32 * 32], [1920] * 10),
+                    img_scale=zip([int(_a) for _a in 1920 * linspace(0.4, 1.0, 10) // 32 * 32], [1920] * 10),
                     multiscale_mode='value',
                     override=True,
                     keep_ratio=True)
