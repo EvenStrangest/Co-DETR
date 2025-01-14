@@ -6,10 +6,10 @@ img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)  # TODO: what should these be?
 # background_color = ()
 
-train_pipeline = [
+train_pipeline = [  # TODO: !!! this is superceded by projects/configs/co_deformable_detr/co_deformable_detr_diet_r50_1x_robota.py
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations', with_bbox=True),
-    dict(type='Resize', img_scale=(1333, 800), keep_ratio=True),
+    dict(type='Resize', img_scale=(1920, 1920), keep_ratio=True),
     dict(type='RandomFlip', flip_ratio=0.5),  # TODO: consider specifying direction=['horizontal', 'vertical']
     # TODO: consider adding a Rotate augmentation; specify img_fill_val=background_color
     # TODO: consider adding a Translate augmentation; specify img_fill_val=background_color
@@ -22,7 +22,7 @@ val_pipeline = [  # TODO: also load annotations, since this is not a blind test!
     dict(type='LoadImageFromFile'),
     dict(
         type='MultiScaleFlipAug',
-        img_scale=(1333, 800),
+        img_scale=(1920, 1920),
         flip=False,
         transforms=[
             dict(type='Resize', keep_ratio=True),
@@ -36,7 +36,7 @@ val_pipeline = [  # TODO: also load annotations, since this is not a blind test!
 test_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations', with_bbox=True),
-    dict(type='Resize', img_scale=(1333, 800), keep_ratio=True),
+    dict(type='Resize', img_scale=(1920, 1920), keep_ratio=True),
     dict(type='RandomFlip', flip_ratio=0.5, direction=['horizontal', 'vertical']),
     dict(type='Normalize', **img_norm_cfg),
     dict(type='Pad', size_divisor=32),

@@ -1,4 +1,5 @@
 from os import environ
+from numpy import linspace
 
 _base_ = ['../_base_/default_runtime.py']
 if environ.get('CHOICE_DATASET') == 'LabA':
@@ -136,10 +137,7 @@ train_pipeline = [
             [
                 dict(
                     type='Resize',
-                    img_scale=[(480, 1333), (512, 1333), (544, 1333),
-                               (576, 1333), (608, 1333), (640, 1333),
-                               (672, 1333), (704, 1333), (736, 1333),
-                               (768, 1333), (800, 1333)],
+                    img_scale=zip([int(_a) for _a in 1920 * linspace(0.2, 1.0, 30) // 32 * 32], [1920] * 30),
                     multiscale_mode='value',
                     keep_ratio=True)
             ],
@@ -148,27 +146,24 @@ train_pipeline = [
                     type='Resize',
                     # The radio of all image in train dataset < 7
                     # follow the original impl
-                    img_scale=[(400, 4200), (500, 4200), (600, 4200)],
+                    img_scale=zip([int(_a) for _a in 1920 * linspace(0.2, 1.0, 30) // 32 * 32], [1920] * 30),
                     multiscale_mode='value',
                     keep_ratio=True),
                 dict(
                     type='RandomCrop',
                     crop_type='absolute_range',
-                    crop_size=(384, 600),
+                    crop_size=(1080, 1920),
                     allow_negative_crop=True),
                 dict(
                     type='Resize',
-                    img_scale=[(480, 1333), (512, 1333), (544, 1333),
-                               (576, 1333), (608, 1333), (640, 1333),
-                               (672, 1333), (704, 1333), (736, 1333),
-                               (768, 1333), (800, 1333)],
+                    img_scale=zip([int(_a) for _a in 1920 * linspace(0.2, 1.0, 30) // 32 * 32], [1920] * 30),
                     multiscale_mode='value',
                     override=True,
                     keep_ratio=True)
             ]
         ]),
     dict(type='Normalize', **img_norm_cfg),
-    dict(type='Pad', size_divisor=1),
+    dict(type='Pad', size_divisor=1),  # TODO: consider changing this to 32
     dict(type='DefaultFormatBundle'),
     dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels'])
 ]
