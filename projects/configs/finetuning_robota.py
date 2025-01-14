@@ -12,7 +12,8 @@ _base_ = [
 # load_from = 'https://files.clear.ml/Co-DETR/FtRA_with_Round4and5.1844c666b4394c668cf6b41211754744/models/epoch_3.pth'
 # load_from = 'https://files.clear.ml/Co-DETR/FtRA_with_Round4and5more.45bcbfcf7d0c4fd68ab8c7a8ce838b41/models/epoch_4.pth'
 # load_from = 'https://files.clear.ml/Co-DETR/FtRA_with_Rnd4n5_withAR14.756aa029cef947f084477505dd05f904/models/epoch_2.pth'
-load_from = 'https://files.clear.ml/Co-DETR/FtRA_wRnd4n5_wAR14_BBfrozen2.91e85f11eafd40d9a7f3c4b44dce6696/models/epoch_1.pth'
+# load_from = 'https://files.clear.ml/Co-DETR/FtRA_wRnd4n5_wAR14_BBfrozen2.91e85f11eafd40d9a7f3c4b44dce6696/models/epoch_1.pth'
+load_from = 'https://files.clear.ml/Co-DETR/FtRA_wRnd4n5_BBfrz2_snsNMS_less_class_more_queries.1cc71ac277914a6ca8e72ee3718715ec/models/epoch_4.pth'
 # resume_from = ''
 
 model = dict(
