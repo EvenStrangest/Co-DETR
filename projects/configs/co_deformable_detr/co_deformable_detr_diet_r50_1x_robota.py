@@ -185,8 +185,8 @@ train_pipeline = [
 # ]
 
 data = dict(
-    samples_per_gpu=4,  # TODO: consider increasing this
-    workers_per_gpu=4,  # TODO: consider increasing this
+    samples_per_gpu=2,  # TODO: consider increasing this
+    workers_per_gpu=2,  # TODO: consider increasing this
     train=dict(filter_empty_gt=False, pipeline=train_pipeline),
     # val=dict(pipeline=test_pipeline),
     # test=dict(pipeline=test_pipeline)
