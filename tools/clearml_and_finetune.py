@@ -132,7 +132,7 @@ def main():
     # TODO: consider optionally postponing this, for more local tests before enqueuing the task
     task.execute_remotely(queue_name="default")
     print(f"sys.argv: {sys.argv}")
-    if task.is_remote():
+    if task.get_input() and task.get_input()['execution']['queue']:
         if not torch.cuda.is_available():
             raise RuntimeError("No CUDA GPUs are available at initialization.")
         else:
