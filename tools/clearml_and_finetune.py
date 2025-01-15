@@ -23,6 +23,7 @@ from mmdet.utils import (collect_env, get_device, get_root_logger,
 
 from clearml import Task
 import clearml
+from clearml.config import running_remotely
 
 from projects import *
 import projects.datasets.robota  # TODO: replace this with the correct entry in the `custom_imports` field of the config file, a la `custom_imports = dict(imports=['projects.datasets.robota'], allow_failed_imports=False)`
@@ -132,7 +133,7 @@ def main():
     # TODO: consider optionally postponing this, for more local tests before enqueuing the task
     task.execute_remotely(queue_name="default")
     print(f"sys.argv: {sys.argv}")
-    if task.get_input() and task.get_input()['execution']['queue']:
+    if running_remotely():
         if not torch.cuda.is_available():
             raise RuntimeError("No CUDA GPUs are available at initialization.")
         else:
