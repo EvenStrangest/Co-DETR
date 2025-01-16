@@ -52,11 +52,11 @@ data = dict(
     workers_per_gpu=2,
     train=dict(type='ConcatDataset',
                datasets=[
-                   dict(
-                       type=dataset_type,
-                       ann_file=data_root + 'as_yolo_as_coco_ann_train.json',
-                       img_prefix=data_root + 'as_yolo/images/',
-                       pipeline=train_pipeline),
+                   # dict(
+                   #     type=dataset_type,
+                   #     ann_file=data_root + 'as_yolo_as_coco_ann_train.json',
+                   #     img_prefix=data_root + 'as_yolo/images/',
+                   #     pipeline=train_pipeline),
                    # dict(
                    #     type=dataset_type,
                    #     ann_file=data_root + 'photomontages_round_1_as_coco_annotations.json',
