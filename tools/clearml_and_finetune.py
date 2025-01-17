@@ -149,7 +149,7 @@ def main():
 
     # set environment variable for the dataset path
     if os.environ.get('CHOICE_DATASET') == 'RobotA':
-        dataset_name, dataset_version = 'RobotA_with_Photomontage_Round5', '1.0.0'
+        dataset_name, dataset_version = 'RobotA_with_Photomontage_Round6', '1.0.0'
         print(f"Using {dataset_name} dataset")
         robota = clearml.Dataset.get(dataset_project='SurgicalTools', dataset_name=dataset_name, dataset_version=dataset_version)
         os.environ['MMDET_DATASETS'] = robota.get_local_copy() + '/'
