@@ -101,16 +101,16 @@ data = dict(
         test_mode=False),
     test=dict(type='ConcatDataset',
               datasets=[
+                  # dict(
+                  #     type=dataset_type,
+                  #     ann_file=data_root + 'as_yolo_as_coco_ann_test.json',
+                  #     img_prefix=data_root + 'as_yolo/images/',
+                  #     pipeline=val_pipeline,
+                  #     test_mode=False),
                   dict(
                       type=dataset_type,
-                      ann_file=data_root + 'as_yolo_as_coco_ann_test.json',
-                      img_prefix=data_root + 'as_yolo/images/',
-                      pipeline=val_pipeline,
-                      test_mode=False),
-                  dict(
-                      type=dataset_type,
-                      ann_file=data_root + 'photomontages_round_5again_as_coco_annotations.json',
-                      # img_prefix=data_root + 'photomontages/round_5again/',
+                      ann_file=data_root + 'photomontages_round_6_as_coco_annotations.json',
+                      # img_prefix=data_root + 'photomontages/round_6/',
                       img_prefix=data_root + '',
                       pipeline=val_pipeline,
                       test_mode=False),
